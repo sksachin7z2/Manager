@@ -31,3 +31,9 @@ body{
  
   color: brown;
 }
+.hover-cursor:hover{
+  cursor: pointer;
+}
+@media screen and (max-width: 793px) {
+  
+}

@@ -4,7 +4,7 @@ import TasksContext from '../context/tasks/TasksContext';
 
 // import CreateProject from './CreateProject'
 import Projects from './Projects'
-function Addproject() {
+function Addproject(props) {
         useEffect(() => {
             getProject();
              // eslint-disable-next-line
@@ -41,10 +41,10 @@ function Addproject() {
                 <img id='rotatable'  src={downarrow} alt="down" width="10%"/>
                  <b> Projects </b>
                 </a>
-                <div><i onClick={handleaddpro} className="fas fa-plus btnp"></i></div>
+                <div style={{paddingRight:"2rem"}}><i onClick={handleaddpro} className="fas fa-plus btnp"></i></div>
               </div>
-              <div className="collapse" id="collapseExample">
-                <div className="card card-body">
+              <div style={{margin:"1rem"}} className="collapse" id="collapseExample">
+                <div style={{backgroundColor:"#f4f1f1",border:"none"}} className="card card-body">
                 {project.map((proj)=>{
                return <Projects  key={proj._id} project={proj} />
            })}

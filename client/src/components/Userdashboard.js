@@ -31,11 +31,13 @@ function Userdashboard() {
         refClose.current.click()                                         
         // props.showAlert("Updated Successfully","success");
       }
+     
       
     useEffect(() => {
        
+      localStorage.setItem("projectname","Inbox");
+      localStorage.setItem("projectId","61d1719194c87b7ff0486240");
           getNote();
-        
        
         
           // eslint-disable-next-line
@@ -43,6 +45,11 @@ function Userdashboard() {
     
     return (
         <div>
+
+            <div className="sidebar">
+            
+            </div>
+              <div className="mainnav">
             <nav style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"8vh",backgroundColor:"#db4c3f"}}>
             <Link to="/"><img style={{marginLeft:"10vw"}} src={home} alt="home" width="5%" /></Link>
             </nav>
@@ -50,7 +57,9 @@ function Userdashboard() {
             <div style={{overflow:"scroll",height:"100vh",width:"25vw",backgroundColor:"#f4f1f1"}}>
             <div style={{display:"flex",flexDirection:"column",padding:"2rem"}}>
                    <div className='d-flex my-2'> <div><img src={inbox} alt="inbox" /></div>&emsp;
-                   <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                   <div onClick={()=>{localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+                                        getNote();
+                                       localStorage.setItem("projectname","Inbox")}}  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
                      Inbox
                      </div></div>
                   
@@ -64,15 +73,15 @@ function Userdashboard() {
                     Upcoming
                      </div></div>
                 </div>
-                <Addproject/>
+                <Addproject />
 
             </div>
             <div  style={{position:"sticky",top:0,zIndex:2,height:"100vh",width:"75vw",padding:"2rem 2rem 13rem 2rem",overflow:"scroll"}}>
-                    <h3>Inbox&emsp;</h3>{date}
+                    <h3>{localStorage.getItem("projectname")}&emsp;</h3>{date}
                     <hr  />
 
                     {notes.map((task)=>{
-               return <Tasks  key={task._id} task={task} updateNote={updateNote}/>
+               return <Tasks   key={task._id} task={task} updateNote={updateNote}/>
            })}
 
                 {visible &&<Addtask visible={visible} />}
@@ -85,7 +94,7 @@ function Userdashboard() {
                 
             </div>
             </div>
-
+</div>
 
             <button ref={ref} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal

@@ -170,6 +170,9 @@ const handlesubmitproject=(name)=>{
     setvisible(false);
     addProject(name)
 }
+const fetchtaskstate=()=>{
+  setNotes(notes);
+}
 //project states
 
 const getProject=async()=>{
@@ -324,7 +327,7 @@ setProgress(70);
 
     
     return (
-        <noteContext.Provider value={{project,proname,notes,addNote,getNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject}}>
+        <noteContext.Provider value={{project,proname,notes,addNote,getNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )
