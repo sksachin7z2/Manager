@@ -2,7 +2,8 @@ import React,{useContext} from 'react'
 import TasksContext from '../context/tasks/TasksContext'
 function Tasks(props) {
   const context = useContext(TasksContext);
-  const {deleteNote,editNote}=context;
+  const {deleteNote}=context;
+
     return (
         <div>
             <div className="card" >
@@ -13,7 +14,7 @@ function Tasks(props) {
    
     
     <i onClick={()=>{deleteNote(props.task._id)}} className="far fa-check-circle"></i>
-    <i onClick={()=>{editNote(props.task._id)}} className="fas fa-edit mx-3"></i>
+    <i onClick={()=>{props.updateNote(props.task)}} className="fas fa-edit mx-3"></i>
   </div>
 </div>
 <hr />

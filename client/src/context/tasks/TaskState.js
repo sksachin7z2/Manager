@@ -166,6 +166,10 @@ const handlesubmittask=(title,description)=>{
     setvisible(false);
     addNote(title,description)
 }
+const handlesubmitproject=(name)=>{
+    setvisible(false);
+    addProject(name)
+}
 //project states
 
 const getProject=async()=>{
@@ -286,7 +290,7 @@ const deleteProject=async(id)=>{
   json=JSON.stringify(json);
   setProgress(50);
  if(json!=='[]'){
-  const response1 = await fetch(`${host}/api/task/deletealltask`, {
+  const response1 = await fetch(`${host}/api/task/deletealltasks`, {
     method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
    
     headers: {
@@ -296,6 +300,8 @@ const deleteProject=async(id)=>{
     }
   });
   const json1 =await response1.json(); 
+  
+    setNotes(notesInitial);
   console.log(json1);
 }
 setProgress(70);
@@ -309,14 +315,16 @@ setProgress(70);
   });
   const json2 =await response2.json(); 
   console.log(json2);
- 
+  const newProjects= project.filter((pro)=>{return pro._id!==id});
+    setProject(newProjects);
+    
   setProgress(100);
 }
 
 
     
     return (
-        <noteContext.Provider value={{proname,notes,addNote,getNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask}}>
+        <noteContext.Provider value={{project,proname,notes,addNote,getNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject}}>
             {props.children}
         </noteContext.Provider>
     )

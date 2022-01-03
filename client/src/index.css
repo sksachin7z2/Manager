@@ -23,3 +23,11 @@ i:hover{
 body{
   overflow: hidden;
 }
+.rotate{
+  transform: rotate(90deg);
+}
+
+.btnp:hover{
+ 
+  color: brown;
+}
