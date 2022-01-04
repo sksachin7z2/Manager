@@ -1,27 +1,146 @@
-import React,{useContext,useState} from 'react'
-import TasksContext from '../context/tasks/TasksContext'
-function Addtask() {
-  const context = useContext(TasksContext);
-  const {handlesubmitproject}=context;
-  
-const [project, setproject] = useState({name:""});
+import React,{useContext,useRef,useState,useEffect} from 'react'
+import downarrow from './down-arrow.png'
+import TasksContext from '../context/tasks/TasksContext';
 
-const onchange=(e)=>{
-  setproject({...project,[e.target.name]:e.target.value})
-}
+// import CreateProject from './CreateProject'
+import Projects from './Projects'
+function CreateProject(props) {
+        useEffect(() => {
+            getProject();
+             // eslint-disable-next-line
+        }, [])
+
+        
+        const ref5=useRef();
+        const refClose5=useRef();
+        const ref4=useRef();
+        const refClose4=useRef();
+        const [pro, setpro] = useState({name:""})
+        const [epro, setepro] = useState({id:"",ename:""})
+        const handleClick=()=>{
+          addProject(pro.name)
+          refClose4.current.click();
+        }
+        const updateProject=(currentpro)=>{
+          ref5.current.click();
+          setepro({id:currentpro._id,ename:currentpro.name});
+        }
+        const handleUpdate=()=>{
+            editProject(epro.id,epro.ename);
+            refClose5.current.click();
+        }
+    const addrotate=()=>{
+        var a=document.getElementById('rotatable');
+        if(a.classList.contains('rotate'))
+        a.classList.remove('rotate');
+        else{
+            a.classList.add('rotate')
+        }
+    }
+    const onchange=(e)=>{
+        setpro({...pro,[e.target.name]:e.target.value})
+    }
+    const onechange=(e)=>{
+        setepro({...epro,[e.target.name]:e.target.value})
+    }
+    const handleaddpro1=()=>{
+            ref4.current.click();
+            // document.getElementById(props.campusId).style.backgroundColor="rgb(0,0,0,0.5)"
+            
+    }
+    const context = useContext(TasksContext)
+    const {project,addProject,getProject,editProject}=context;
     return (
-      <>
-      <div className="mb-3">
-      <label htmlFor="name" className="form-label">Name</label>
-      <input type="text" className="form-control" value={project.name} id="name" name="name" placeholder="name" onChange={onchange}/>
-    </div>
-    
-    <button className='btn btn-primary' onClick={()=>{handlesubmitproject(project.name)
-                                                      setproject({name:""})  }}>Create Project</button>
+        <div>
+            <div  style={{display:"flex"}}>
+                
+                <a onClick={addrotate} style={{textDecoration:"none",paddingLeft:"2rem"}}   data-bs-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
+                <img id='rotatable'  src={downarrow} alt="down" width="10%"/>
+                 <b> Projects </b>
+                </a>
+                <div style={{paddingRight:"2rem"}}><i onClick={handleaddpro1} className="fas fa-plus btnp"></i></div>
+              </div>
+              <div style={{margin:"1rem"}} className="collapse" id="collapseExample">
+                <div style={{backgroundColor:"#f4f1f1",border:"none"}} className="card card-body">
+                {project.map((proj)=>{
+               return <Projects  key={proj._id} project={proj} updateProject={updateProject} />
+           })}
+                </div>
+              </div>
+             
+        
+              
 
-                                                      
-    </>
+              <button ref={ref4} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#create">
+  Launch demo modal
+</button>
+
+
+<div style={{backgroundColor:"rgb(0,0,0,0.5)"}} className="modal" id="create" tabIndex="-1" aria-labelledby="exampleModa" aria-hidden="true">
+  <div className="modal-dialog">
+    <div  className="modal-content">
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
+        <h5 className="modal-title" id="exampleModa">Create Project</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
+      <form>
+  <div className="mb-3">
+    <label  htmlFor="name" className="form-label ">Name</label>
+    <input type="text" value={pro.name} className="form-control" id="name" name="name" onChange={onchange}/>
+    
+  </div>
+  
+  
+  
+</form>
+      </div>
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
+        <button ref={refClose4} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button disabled={pro.name.length<2}type="button" className="btn btn-primary"  onClick={handleClick}>Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+            {/* update project */}
+
+
+            <button ref={ref5} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#update">
+  Launch demo modal
+</button>
+
+<div style={{backgroundColor:"rgb(0,0,0,0.5)"}} className="modal" id="update" tabIndex="-1" aria-labelledby="exampleModalL" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
+        <h5 className="modal-title" id="exampleModalL">Update Project</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
+      <form>
+  <div className="mb-3">
+    <label  htmlFor="ename" className="form-label ">Name</label>
+    <input type="text" value={epro.ename} className="form-control" id="ename" name="ename" onChange={onechange}/>
+    
+  </div>
+  
+  
+  
+</form>
+      </div>
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
+        <button ref={refClose5} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button disabled={epro.ename.length<2}type="button" className="btn btn-primary"  onClick={handleUpdate}>Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>     
+        
     )
 }
 
-export default Addtask
+export default CreateProject

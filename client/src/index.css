@@ -34,6 +34,20 @@ body{
 .hover-cursor:hover{
   cursor: pointer;
 }
+.sidebar{
+  display:none;
+}
+.mainnav{
+  display:flex;
+  flex-direction: column;
+}
+
+
 @media screen and (max-width: 793px) {
-  
+  .sidebar{
+    display:block;
+  }
+  .mainnav{
+    display:none;
+  }
 }

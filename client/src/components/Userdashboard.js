@@ -9,6 +9,7 @@ import TasksContext from '../context/tasks/TasksContext';
 import Tasks from './Tasks';
 import {Link} from 'react-router-dom'
 import Addproject from './Addproject'
+import CreateProject from './CreateProject'
 function Userdashboard() {
         let date=new Date();
             date=date.toDateString()
@@ -48,39 +49,53 @@ function Userdashboard() {
 
             <div className="sidebar">
             
-            <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            o
-</button>
+            <div  style={{padding:"3px",borderRadius:"0.3rem",backgroundColor:"#ed8076",position:"absolute",top:"0.45rem",left:"1rem",zIndex:900}}   data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <svg className="menu_icon" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M4.5 5h15a.5.5 0 1 1 0 1h-15a.5.5 0 0 1 0-1zm0 6h15a.5.5 0 1 1 0 1h-15a.5.5 0 1 1 0-1zm0 6h15a.5.5 0 1 1 0 1h-15a.5.5 0 1 1 0-1z"></path></svg>
+</div>
 
-<div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<div  style={{zIndex:1055,width:"300px"}} className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div className="offcanvas-header">
     <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
     <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+    <div style={{overflow:"scroll",height:"100vh",width:"264px",backgroundColor:"#f4f1f1"}}>
+            <div style={{display:"flex",flexDirection:"column",padding:"2rem"}}>
+                   <div className='d-flex my-2'> <div><img src={inbox} alt="inbox" /></div>&emsp;
+                   <div onClick={()=>{localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+                                        getNote();
+                                       localStorage.setItem("projectname","Inbox")}}  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                     Inbox
+                     </div></div>
+                  
+                     <div className="d-flex my-2">
+                    <div><img src={calender} alt="calender" /></div>&emsp;
+                    <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                    Today
+                     </div></div>
+                    <div className="d-flex my-2"><div><img src={upcoming} alt="upcoming" /></div>&emsp;
+                    <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                    Upcoming
+                     </div></div>
+                </div>
+                <CreateProject campusId={"offcanvasExample"}/>
+
+            </div>
     </div>
-    <div className="dropdown mt-3">
-      <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a className="dropdown-item" href="#">Action</a></li>
-        <li><a className="dropdown-item" href="#">Another action</a></li>
-        <li><a className="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
+    
   </div>
+  
 </div>
 
             </div>
-              <div className="mainnav">
-            <nav style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"8vh",backgroundColor:"#db4c3f"}}>
-            <Link to="/"><img style={{marginLeft:"10vw"}} src={home} alt="home" width="5%" /></Link>
+              
+            <nav  style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"44px",backgroundColor:"#db4c3f"}}>
+              
+            <Link className='nav-active' to="/"><div style={{marginLeft:"75px",maxWidth:"min-content"}}><img  src={home} alt="home" width="24px" /></div></Link>
             </nav>
-            <div  className='d-flex'>
-            <div style={{overflow:"scroll",height:"100vh",width:"25vw",backgroundColor:"#f4f1f1"}}>
+            <div   className='d-flex '>
+            <div className='mainnav' style={{overflow:"scroll",height:"100vh",width:"289px",backgroundColor:"#f4f1f1"}}>
             <div style={{display:"flex",flexDirection:"column",padding:"2rem"}}>
                    <div className='d-flex my-2'> <div><img src={inbox} alt="inbox" /></div>&emsp;
                    <div onClick={()=>{localStorage.setItem("projectId","61d1719194c87b7ff0486240");
@@ -102,7 +117,7 @@ function Userdashboard() {
                 <Addproject />
 
             </div>
-            <div  style={{position:"sticky",top:0,zIndex:2,height:"100vh",width:"75vw",padding:"2rem 2rem 13rem 2rem",overflow:"scroll"}}>
+            <div  style={{position:"sticky",top:0,zIndex:2,height:"100vh",width:"100vw",padding:"2rem 2rem 13rem 2rem",overflow:"scroll"}}>
                     <h3>{localStorage.getItem("projectname")}&emsp;</h3>{date}
                     <hr  />
 
@@ -120,7 +135,7 @@ function Userdashboard() {
                 
             </div>
             </div>
-</div>
+
 
             <button ref={ref} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal

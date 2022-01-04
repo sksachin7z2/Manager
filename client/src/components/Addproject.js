@@ -9,15 +9,28 @@ function Addproject(props) {
             getProject();
              // eslint-disable-next-line
         }, [])
-    const ref=useRef(null)
-    const refClose=useRef(null)
-    const [pro, setpro] = useState({name:""})
-    const handleClick=()=>{
-            addProject(pro.name)
-            refClose.current.click();
-    }
+
+        
+        const ref2=useRef();
+        const refClose2=useRef();
+        const ref1=useRef();
+        const refClose1=useRef();
+        const [pro, setpro] = useState({name:""})
+        const [epro, setepro] = useState({id:"",ename:""})
+        const handleClick=()=>{
+          addProject(pro.name)
+          refClose1.current.click();
+        }
+        const updateProject=(currentpro)=>{
+          ref2.current.click();
+          setepro({id:currentpro._id,ename:currentpro.name});
+        }
+        const handleUpdate=()=>{
+            editProject(epro.id,epro.ename);
+            refClose2.current.click();
+        }
     const addrotate=()=>{
-        var a=document.getElementById('rotatable');
+        var a=document.getElementById('rotatable1');
         if(a.classList.contains('rotate'))
         a.classList.remove('rotate');
         else{
@@ -27,18 +40,21 @@ function Addproject(props) {
     const onchange=(e)=>{
         setpro({...pro,[e.target.name]:e.target.value})
     }
+    const onechange=(e)=>{
+        setepro({...epro,[e.target.name]:e.target.value})
+    }
     const handleaddpro=()=>{
-            ref.current.click();
+            ref1.current.click();
 
     }
     const context = useContext(TasksContext)
-    const {project,addProject,getProject}=context;
+    const {project,addProject,getProject,editProject}=context;
     return (
         <div>
             <div  style={{display:"flex"}}>
                 
                 <a onClick={addrotate} style={{textDecoration:"none",paddingLeft:"2rem"}}   data-bs-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
-                <img id='rotatable'  src={downarrow} alt="down" width="10%"/>
+                <img id='rotatable1'  src={downarrow} alt="down" width="10%"/>
                  <b> Projects </b>
                 </a>
                 <div style={{paddingRight:"2rem"}}><i onClick={handleaddpro} className="fas fa-plus btnp"></i></div>
@@ -46,18 +62,18 @@ function Addproject(props) {
               <div style={{margin:"1rem"}} className="collapse" id="collapseExample">
                 <div style={{backgroundColor:"#f4f1f1",border:"none"}} className="card card-body">
                 {project.map((proj)=>{
-               return <Projects  key={proj._id} project={proj} />
+               return <Projects  key={proj._id} project={proj} updateProject={updateProject} />
            })}
                 </div>
               </div>
               
 
-              <button ref={ref} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button ref={ref1} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#createProject">
   Launch demo modal
 </button>
 
 
-<div  className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div  className="modal fade" id="createProject" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
@@ -77,13 +93,48 @@ function Addproject(props) {
 </form>
       </div>
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
-        <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button ref={refClose1} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button disabled={pro.name.length<2}type="button" className="btn btn-primary"  onClick={handleClick}>Create</button>
       </div>
     </div>
   </div>
 </div>
             
+
+            {/* update project */}
+
+
+            <button ref={ref2} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#updateProject">
+  Launch demo modal
+</button>
+
+
+<div  className="modal fade" id="updateProject" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Update Project</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
+      <form>
+  <div className="mb-3">
+    <label  htmlFor="ename" className="form-label ">Name</label>
+    <input type="text" value={epro.ename} className="form-control" id="ename" name="ename" onChange={onechange}/>
+    
+  </div>
+  
+  
+  
+</form>
+      </div>
+      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
+        <button ref={refClose2} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button disabled={epro.ename.length<2}type="button" className="btn btn-primary"  onClick={handleUpdate}>Update</button>
+      </div>
+    </div>
+  </div>
+</div>
 
                
         </div>
