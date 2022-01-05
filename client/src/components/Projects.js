@@ -14,7 +14,8 @@ function Projects(props) {
   <div className="card-body">
     <h5 className="card-title">{props.project.name}</h5>
    
-    <i onClick={async()=>{await deleteProject(props.project._id);
+    <i onClick={async()=>{ localStorage.setItem("projectId",props.project._id);
+      await deleteProject(props.project._id);
                               localStorage.setItem("projectname","Inbox");
                              localStorage.setItem("projectId","61d1719194c87b7ff0486240");
                              getNote();}} className="fas fa-trash"></i>

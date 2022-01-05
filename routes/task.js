@@ -4,11 +4,22 @@ const router = express.Router();
 const Task = require("../models/Task");
 const { body, validationResult } = require("express-validator");
 const fetchproject = require("../middleware/fetchproject");
+const fetchschedule = require("../middleware/fetchschedule");
 
 //Route 1 get all the notes in User detail using :GET "/api/notes/fetchallnotes".login requiered
 router.get("/fetchalltasks",fetchproject, async (req, res) => {
   try {
     const tasks = await Task.find({project:req.project});
+    res.json(tasks);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error Occured");
+  }
+});
+//Route 1 get all the notes in User detail using :GET "/api/notes/fetchallnotes".login requiered
+router.get("/fetchallduetasks",fetchschedule, async (req, res) => {
+  try {
+    const tasks = await Task.find({schedule:req.schedule});
     res.json(tasks);
   } catch (error) {
     console.error(error.message);
@@ -49,7 +60,7 @@ router.post(
   }
 );
 //Route 3 to update  notes in User detail using :PUT: "/api/notes/updatenote".login requiered
-router.put("/updatetask/:id", fetchproject, async (req, res) => {
+router.put("/updatetask/:id", async (req, res) => {
   const { title, description} = req.body;
   try {
     //create a newNote object
@@ -67,9 +78,9 @@ router.put("/updatetask/:id", fetchproject, async (req, res) => {
     if (!task) {
       return res.status(404).send("Not found");
     }
-    if (task.project.toString() !== req.project) {
-      return res.status(401).send("not authorised");
-    }
+    // if (task.project.toString() !== req.project) {
+    //   return res.status(401).send("not authorised");
+    // }
    task = await Task.findByIdAndUpdate(
       req.params.id,
       { $set: newTask },
@@ -82,7 +93,7 @@ router.put("/updatetask/:id", fetchproject, async (req, res) => {
   }
 });
 //Route 4 to delte a note in User detail using :DELETE: "/api/notes/deletenote".login requiered
-router.delete("/deletetask/:id",fetchproject, async (req, res) => {
+router.delete("/deletetask/:id", async (req, res) => {
 
   try {
     //find the note to be delted and deleted it
@@ -91,9 +102,9 @@ router.delete("/deletetask/:id",fetchproject, async (req, res) => {
       return res.status(404).send("Not found");
     }
     // allow deletion if owner owns the note
-    if (task.project.toString() !== req.project) {
-      return res.status(401).send("not authorised");
-    }
+    // if (task.project.toString() !== req.project) {
+    //   return res.status(401).send("not authorised");
+    // }
     task = await Task.findByIdAndDelete(req.params.id);
     res.json({ success: "note has been deleted", task: task });
   } catch (error) {

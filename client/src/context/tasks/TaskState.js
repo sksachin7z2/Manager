@@ -13,6 +13,7 @@ const NoteState=(props)=>{
   const [progress, setProgress] = useState(0);
 
 const [notes, setNotes] = useState(notesInitial);
+// const [scheduletask, setscheduletask] = useState(notesInitial);
 const [project, setProject] = useState(notesInitial);
 //get a note
 const getNote=async()=>{
@@ -26,6 +27,29 @@ const getNote=async()=>{
        'Content-Type': 'application/json',
       //  "auth-token":localStorage.getItem('token')
       'projectId':localStorage.getItem('projectId')
+     }
+    
+     
+   });
+ //   const json =response.json(); 
+     const json =await response.json()
+    // console.log(json);
+    setNotes(json)
+    
+    setLoading(false);
+ }
+const getScheduleNote=async()=>{
+  //api call
+   
+  setLoading(true);
+  const response = await fetch(`${host}/api/task/fetchallduetasks`, {
+     method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    
+     headers: {
+       'Content-Type': 'application/json',
+      //  "auth-token":localStorage.getItem('token')
+      'schedule':localStorage.getItem('schedule'),
+      
      }
     
      
@@ -72,7 +96,7 @@ const deleteNote=async(id)=>{
       headers: {
         'Content-Type': 'application/json',
         // "auth-token":localStorage.getItem('token')
-        'projectId':localStorage.getItem('projectId')
+        // 'projectId':localStorage.getItem('projectId')
       }
     });
     const json =await response.json(); 
@@ -92,7 +116,7 @@ const editNote=async(id,title,description)=>{
         headers: {
           'Content-Type': 'application/json',
           // "auth-token":localStorage.getItem('token')
-          'projectId':localStorage.getItem('projectId')
+          // 'projectId':localStorage.getItem('projectId')
         },
        
         body: JSON.stringify({title,description})
@@ -327,7 +351,7 @@ setProgress(70);
 
     
     return (
-        <noteContext.Provider value={{project,proname,notes,addNote,getNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{project,proname,notes,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )

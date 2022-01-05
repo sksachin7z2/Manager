@@ -19,7 +19,7 @@ const { Schema } = mongoose;
    
   schedule:{
        type:Date,
-       default:Date.now
+      default:new Date(2022,0,5).setHours(5,30,0)
    },
    
    date:{

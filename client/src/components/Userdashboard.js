@@ -17,7 +17,7 @@ function Userdashboard() {
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {visible,handleaddtask,notes,getNote,editNote}=context;
+           const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote}=context;
     //    console.log(visible);
     const onchange=(e)=>{
         setnote({...note,[e.target.name]:e.target.value})
@@ -38,8 +38,10 @@ function Userdashboard() {
        
       localStorage.setItem("projectname","Inbox");
       localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+     
+      
           getNote();
-       
+         
         
           // eslint-disable-next-line
       }, [])
@@ -55,12 +57,12 @@ function Userdashboard() {
 
 <div  style={{zIndex:1055,width:"300px"}} className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Manage</h5>
     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
     <div>
-    <div style={{overflow:"scroll",height:"100vh",width:"264px",backgroundColor:"#f4f1f1"}}>
+    <div style={{height:"100vh",width:"264px",backgroundColor:"#f4f1f1"}}>
             <div style={{display:"flex",flexDirection:"column",padding:"2rem"}}>
                    <div className='d-flex my-2'> <div><img src={inbox} alt="inbox" /></div>&emsp;
                    <div onClick={()=>{localStorage.setItem("projectId","61d1719194c87b7ff0486240");
@@ -71,7 +73,15 @@ function Userdashboard() {
                   
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
-                    <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                    <div onClick={async()=>{
+                      await getScheduleNote();
+ localStorage.setItem("schedule",new Date(2022,0,5).setHours(5,30,0));
+ localStorage.setItem("projectname","Today")
+ localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+ 
+// getNote();
+
+                    }}   style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
                     Today
                      </div></div>
                     <div className="d-flex my-2"><div><img src={upcoming} alt="upcoming" /></div>&emsp;
@@ -106,7 +116,14 @@ function Userdashboard() {
                   
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
-                    <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                    <div onClick={()=>{
+                      getScheduleNote();
+ localStorage.setItem("schedule",new Date(2022,0,5).setHours(5,30,0));
+ localStorage.setItem("projectname","Today")
+ localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+// getNote();
+
+                    }}   style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
                     Today
                      </div></div>
                     <div className="d-flex my-2"><div><img src={upcoming} alt="upcoming" /></div>&emsp;
@@ -124,6 +141,10 @@ function Userdashboard() {
                     {notes.map((task)=>{
                return <Tasks   key={task._id} task={task} updateNote={updateNote}/>
            })}
+                    {/* {scheduletask.map((scheduletask)=>{
+               return <Tasks   key={scheduletask._id} task={scheduletask} updateNote={updateNote}/>
+           })} */}
+
 
                 {visible &&<Addtask visible={visible} />}
                 {!visible&&<div onClick={handleaddtask} className='d-flex'>
