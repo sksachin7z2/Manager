@@ -116,8 +116,8 @@ function Userdashboard() {
                   
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
-                    <div onClick={()=>{
-                      getScheduleNote();
+                    <div onClick={async()=>{
+                     await getScheduleNote();
  localStorage.setItem("schedule",new Date(2022,0,5).setHours(5,30,0));
  localStorage.setItem("projectname","Today")
  localStorage.setItem("projectId","61d1719194c87b7ff0486240");
