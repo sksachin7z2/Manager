@@ -74,12 +74,12 @@ function Userdashboard() {
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
                     <div onClick={async()=>{
+                      localStorage.setItem("projectname","Today")
                       await getScheduleNote();
- localStorage.setItem("schedule",new Date(2022,0,5).setHours(5,30,0));
- localStorage.setItem("projectname","Today")
- localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+                      localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
+                      localStorage.setItem("projectId","61d1719194c87b7ff0486240");
  
-// getNote();
+                            // getNote();
 
                     }}   style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
                     Today
@@ -88,6 +88,7 @@ function Userdashboard() {
                     <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
                     Upcoming
                      </div></div>
+                    
                 </div>
                 <CreateProject campusId={"offcanvasExample"}/>
 
@@ -117,9 +118,9 @@ function Userdashboard() {
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
                     <div onClick={async()=>{
+                      localStorage.setItem("projectname","Today")
                      await getScheduleNote();
- localStorage.setItem("schedule",new Date(2022,0,5).setHours(5,30,0));
- localStorage.setItem("projectname","Today")
+ localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
  localStorage.setItem("projectId","61d1719194c87b7ff0486240");
 // getNote();
 

@@ -39,6 +39,8 @@ router.post(
   async (req, res) => {
     try {
       const { title, description} = req.body;
+      const schedule = req.header('schedule');
+
       // if there are error,return bad request and the error
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -47,7 +49,7 @@ router.post(
       const task = new Task({
         title,
         description,
-        
+        schedule,
         project: req.project,
       });
       const savedTask = await task.save();

@@ -1,11 +1,17 @@
 import React,{useContext} from 'react'
 import TasksContext from '../context/tasks/TasksContext'
+
 function Tasks(props) {
   const context = useContext(TasksContext);
   const {deleteNote}=context;
+// const onChange=()=>{
+//   onChange1();
+//   // document.getElementById('calenderr').classList.add('dipnone')
+// }
 
     return (
-        <div>
+      <>
+        <div >
             <div className="card" >
   <div className="card-body">
     <h5 className="card-title">{props.task.title}</h5>
@@ -15,10 +21,14 @@ function Tasks(props) {
     
     <i onClick={()=>{deleteNote(props.task._id)}} className="far fa-check-circle"></i>
     <i onClick={()=>{props.updateNote(props.task)}} className="fas fa-edit mx-3"></i>
-  </div>
+    
+    {/* <div>{value}</div> */}
+      </div>
 </div>
 <hr />
         </div>
+  
+      </>
     )
 }
 

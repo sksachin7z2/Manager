@@ -41,7 +41,17 @@ body{
   display:flex;
   flex-direction: column;
 }
-
+.calendar{
+  position: absolute;
+  top: 35vh;
+  left: 15vw;
+  max-width: 71vw;
+  z-index: 1;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 30%);
+}
+.dipnone{
+  display:none;
+}
 
 @media screen and (max-width: 793px) {
   .sidebar{

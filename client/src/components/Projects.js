@@ -20,6 +20,7 @@ function Projects(props) {
                              localStorage.setItem("projectId","61d1719194c87b7ff0486240");
                              getNote();}} className="fas fa-trash"></i>
     <i onClick={()=>{props.updateProject(props.project)}} className="fas fa-edit mx-3"></i>
+   
   </div>
 </div>
 <hr />

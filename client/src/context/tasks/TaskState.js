@@ -73,6 +73,7 @@ const addNote=async(title,description)=>{
     headers: {
       'Content-Type': 'application/json',
       'projectId':localStorage.getItem('projectId'),
+      'schedule':localStorage.getItem('schedule')
       // "auth-token":localStorage.getItem('token')
     },
     body: JSON.stringify({title,description})
