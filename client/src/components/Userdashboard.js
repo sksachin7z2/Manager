@@ -73,10 +73,10 @@ function Userdashboard() {
                   
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
-                    <div onClick={async()=>{
+                    <div onClick={()=>{
                       localStorage.setItem("projectname","Today")
-                      await getScheduleNote();
                       localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
+                      getScheduleNote();
                       localStorage.setItem("projectId","61d1719194c87b7ff0486240");
  
                             // getNote();
@@ -117,10 +117,10 @@ function Userdashboard() {
                   
                      <div className="d-flex my-2">
                     <div><img src={calender} alt="calender" /></div>&emsp;
-                    <div onClick={async()=>{
+                    <div onClick={()=>{
                       localStorage.setItem("projectname","Today")
-                     await getScheduleNote();
- localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
+                      localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
+                      getScheduleNote();
  localStorage.setItem("projectId","61d1719194c87b7ff0486240");
 // getNote();
 
@@ -150,7 +150,7 @@ function Userdashboard() {
                 {visible &&<Addtask visible={visible} />}
                 {!visible&&<div onClick={handleaddtask} className='d-flex'>
                     <div><i className="fa fa-plus"  aria-hidden="true"></i></div>&emsp;
-                    <div className='addtask'>
+                    <div  className='addtask'>
                      Add Task
                      </div>
                 </div>}

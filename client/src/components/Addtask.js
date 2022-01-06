@@ -3,7 +3,8 @@ import TasksContext from '../context/tasks/TasksContext'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 function Addtask() {
-  const [value, onChange1] = useState(new Date());
+  const [value, onChange1] = useState("");
+  // const [value1, onChange1] = useState(null);
 
   const context = useContext(TasksContext);
   const {handlesubmittask}=context;
@@ -23,14 +24,19 @@ const onchange=(e)=>{
       <label htmlFor="description" className="form-label">Description</label>
       <textarea className="form-control" value={task.description} id="description" name="description" rows="3" onChange={onchange}></textarea>
     </div>
-    <span  onClick={()=>{document.getElementById('calenderr').classList.remove('dipnone')}} className="badge bg-primary hover-cursor">Schedule</span>
+    <span  onClick={()=>{document.getElementById('calenderr').classList.remove('dipnone')
+                              }} className="badge bg-primary hover-cursor">Schedule</span>
     <div onClick={()=>{
                       document.getElementById('calenderr').classList.add('dipnone')}}    className='calendar dipnone' id='calenderr'><Calendar
         
         onChange={onChange1}
         value={value}
       /></div>
-    <button className='btn btn-primary' onClick={()=>{localStorage.setItem('schedule',value.setHours(5,30,0,0,0));
+    <button className='btn btn-primary' onClick={()=>{
+      if(value!==""){localStorage.setItem('schedule',value.setHours(5,30,0,0,0));
+    }
+    else
+    localStorage.setItem('schedule',"")
                 handlesubmittask(task.title,task.description)
                                                       settask({title:"",description:""})  }}>Add Task</button>
     </>
