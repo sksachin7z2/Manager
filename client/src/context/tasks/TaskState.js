@@ -2,8 +2,8 @@ import React,{useState} from "react";
 import noteContext from "./TasksContext";
 
 const NoteState=(props)=>{
-    // const host="https://inotebook-prac.herokuapp.com";
-    const host="http://localhost:5000";
+    const host="https://manager7z2.herokuapp.com";
+    // const host="http://localhost:5000";
    const notesInitial=[
    
   ]
