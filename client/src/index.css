@@ -44,7 +44,7 @@ body{
 .calendar{
   position: relative;
     top: -48vh;
-    left: -3vw;
+    left: 1vw;
     background-color: antiquewhite;
     opacity: 100%;
     width: 268px;
