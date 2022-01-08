@@ -61,12 +61,13 @@ function Addtask() {
 
       <button
         style={{
-          border: "none",
-          fontWeight: "bolder",
+          border: "2px solid red",
+          fontWeight: "bold",
           marginLeft: "1.5rem",
           backgroundColor: "#dc3545",
           borderRadius: "9px",
           padding: "3px",
+          color:"white"
         }}
         disabled={task.title.length<1}
         className="hover-cursor"
@@ -82,6 +83,8 @@ function Addtask() {
       >
         Add Task
       </button>
+     
+
       <div
         className="calendar dipnone"
         id="calenderr"

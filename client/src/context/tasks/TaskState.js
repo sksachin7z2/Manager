@@ -353,11 +353,13 @@ setProgress(70);
     
   setProgress(100);
 }
-
+const handlecancel=()=>{
+  setvisible(false);
+}
 
     
     return (
-        <noteContext.Provider value={{project,proname,notes,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{project,proname,notes,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )

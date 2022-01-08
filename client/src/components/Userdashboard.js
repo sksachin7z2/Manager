@@ -21,7 +21,7 @@ function Userdashboard() {
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote}=context;
+           const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel}=context;
     //    console.log(visible);
     const onchange=(e)=>{
         setnote({...note,[e.target.name]:e.target.value})
@@ -166,6 +166,23 @@ function Userdashboard() {
                      Add Task
                      </div>
                 </div>}
+               {visible && <button
+        style={{
+          border: "none",
+          fontWeight: "bolder",
+          marginLeft: "1.5rem",
+          backgroundColor: "antiquewhite",
+          borderRadius: "9px",
+          padding: "3px",
+        }}
+        
+        className="hover-cursor"
+        onClick={
+            handlecancel
+        }
+      >
+        Cancel
+      </button>}
                 
             </div>
             </div>
