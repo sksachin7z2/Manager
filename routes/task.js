@@ -31,10 +31,9 @@ router.post(
   "/addtask",fetchproject,
   
   [
-    body("title", "enter the valid title").isLength({ min: 2 }),
-    body("description", "password must be atleast of 5 character").isLength({
-      min: 2,
-    }),
+    body("title", "enter the valid title").isLength({ min: 1 }),
+    
+    
   ],
   async (req, res) => {
     try {
@@ -64,6 +63,7 @@ router.post(
 //Route 3 to update  notes in User detail using :PUT: "/api/notes/updatenote".login requiered
 router.put("/updatetask/:id", async (req, res) => {
   const { title, description} = req.body;
+  const { schedule} = req.headers;
   try {
     //create a newNote object
     const newTask = {};
@@ -72,6 +72,9 @@ router.put("/updatetask/:id", async (req, res) => {
     }
     if (description) {
       newTask.description = description;
+    }
+    if(schedule){
+      newTask.schedule = schedule;
     }
     
 

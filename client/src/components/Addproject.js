@@ -25,8 +25,8 @@ function Addproject(props) {
           ref2.current.click();
           setepro({id:currentpro._id,ename:currentpro.name});
         }
-        const handleUpdate=()=>{
-            editProject(epro.id,epro.ename);
+        const handleUpdate=async()=>{
+          await  editProject(epro.id,epro.ename);
             refClose2.current.click();
         }
     const addrotate=()=>{
@@ -94,7 +94,7 @@ function Addproject(props) {
       </div>
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
         <button ref={refClose1} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button disabled={pro.name.length<2}type="button" className="btn btn-primary"  onClick={handleClick}>Create</button>
+        <button disabled={pro.name.length<1}type="button" className="btn btn-primary"  onClick={handleClick}>Create</button>
       </div>
     </div>
   </div>
@@ -130,7 +130,7 @@ function Addproject(props) {
       </div>
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
         <button ref={refClose2} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button disabled={epro.ename.length<2}type="button" className="btn btn-primary"  onClick={handleUpdate}>Update</button>
+        <button disabled={epro.ename.length<1}type="button" className="btn btn-primary"  onClick={handleUpdate}>Update</button>
       </div>
     </div>
   </div>

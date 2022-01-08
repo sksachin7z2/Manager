@@ -14,11 +14,11 @@ const { Schema } = mongoose;
 
   description:{
        type:String,
-       required:true
+       
    },
    
   schedule:{
-       type:Date,
+       type:String,
     //   default:new Date(2022,0,5).setHours(5,30,0)
     
    },

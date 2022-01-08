@@ -8,6 +8,16 @@ function Tasks(props) {
 //   onChange1();
 //   // document.getElementById('calenderr').classList.add('dipnone')
 // }
+var getdate=()=>{
+  var date=props.task.schedule;
+  var date1;
+  if(date!==""){
+   date1= date.slice(0,10);
+  }
+ else
+ date1="No due date"
+return date1;
+}
 
     return (
       <>
@@ -21,7 +31,7 @@ function Tasks(props) {
     
     <i onClick={()=>{deleteNote(props.task._id)}} className="far fa-check-circle"></i>
     <i onClick={()=>{props.updateNote(props.task)}} className="fas fa-edit mx-3"></i>
-    
+    <span className="badge bg-success  m-3">{getdate()}</span>
     {/* <div>{value}</div> */}
       </div>
 </div>

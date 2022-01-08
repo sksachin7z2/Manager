@@ -5,12 +5,16 @@ import upcoming from './upcoming.png'
 import home from './home.png'
 import Addtask from './Addtask';
 
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import TasksContext from '../context/tasks/TasksContext';
 import Tasks from './Tasks';
 import {Link} from 'react-router-dom'
 import Addproject from './Addproject'
 import CreateProject from './CreateProject'
 function Userdashboard() {
+  const [value, onChange1] = useState(new Date());
+       
         let date=new Date();
             date=date.toDateString()
             const ref=useRef(null)
@@ -27,9 +31,17 @@ function Userdashboard() {
         setnote({id:currentnote._id,etitle:currentnote.title,edescription:currentnote.description})
         
     }
-    const handleClick=()=>{
-        editNote(note.id,note.etitle,note.edescription);
+    const handleClick=async()=>{
+      if(localStorage.getItem('schedule')==="")
+      localStorage.setItem('schedule',"");
+      else
+      localStorage.setItem("schedule", value);
+       
+
+       await editNote(note.id,note.etitle,note.edescription);
+        
         refClose.current.click()                                         
+        localStorage.setItem("schedule", new Date());
         // props.showAlert("Updated Successfully","success");
       }
      
@@ -183,13 +195,39 @@ function Userdashboard() {
     <textarea name="edescription" id="edescription" className="form-control" cols="30" rows="10"  value={note.edescription} onChange={onchange} minLength={2} required/>
    
   </div>
-  
+  <span  onClick={()=>{document.getElementById('calenderr').classList.remove('dipnone')
+                              }} className="badge bg-primary hover-cursor">Schedule</span>
+    <div
+        className="calendar dipnone"
+        id="calenderr"
+        
+        // onClicklocalStorage.setItem("schedule", value.setHours(5, 30, 0, 0, 0));
+      >
+        <span
+          onClick={() => {
+            
+            localStorage.setItem("schedule", "");
+            document.getElementById("calenderr").classList.add("dipnone");
+          }}
+          className="badge bg-success hover-cursor m-3"
+        >
+          No due date
+        </span>
+        <div
+          onClick={() => {
+             
+            document.getElementById("calenderr").classList.add("dipnone");
+          }}
+        >
+          <Calendar onChange={onChange1} value={value} />
+        </div>
+      </div>
   
 </form>
       </div>
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
         <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button disabled={note.etitle.length<2||note.edescription.length<2}type="button" className="btn btn-primary"  onClick={handleClick}>Update Note</button>
+        <button disabled={note.etitle.length<1}type="button" className="btn btn-primary"  onClick={handleClick}>Update Note</button>
       </div>
     </div>
   </div>

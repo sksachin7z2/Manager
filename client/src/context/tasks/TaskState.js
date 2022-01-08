@@ -117,7 +117,10 @@ const editNote=async(id,title,description)=>{
         headers: {
           'Content-Type': 'application/json',
           // "auth-token":localStorage.getItem('token')
-          // 'projectId':localStorage.getItem('projectId')
+          'projectId':localStorage.getItem('projectId'),
+          // 'schedule':localStorage.getItem('schedule')
+      'schedule':localStorage.getItem('schedule')
+            
         },
        
         body: JSON.stringify({title,description})
@@ -133,6 +136,8 @@ const editNote=async(id,title,description)=>{
         {
           newNotes[index].title=title;
           newNotes[index].description=description;
+          newNotes[index].schedule= localStorage.getItem('schedule');
+          
           
           break;
         }
