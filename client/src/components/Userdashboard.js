@@ -122,7 +122,7 @@ function Userdashboard() {
               
             <nav  style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"44px",backgroundColor:"#db4c3f"}}>
               
-            <Link className='nav-active' to="/"><div style={{marginLeft:"75px",maxWidth:"min-content"}}><img  src={home} alt="home" width="24px" /></div></Link>
+            <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
             </nav>
             <div   className='d-flex '>
             <div className='mainnav' style={{overflow:"scroll",height:"100vh",width:"289px",backgroundColor:"#f4f1f1"}}>
