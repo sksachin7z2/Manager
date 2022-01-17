@@ -48,7 +48,7 @@ function Addtask() {
           onChange={onchange}
         ></textarea>
       </div>
-      <span
+      {localStorage.getItem('projectname')!=="Today"&&<span
         onClick={() => {
           // onChange1(new Date(0,0,0,0,0,0,0,0,0));
          
@@ -57,7 +57,7 @@ function Addtask() {
         className="badge bg-primary hover-cursor"
       >
         Schedule
-      </span>
+      </span>}
 
       <button
         style={{
@@ -75,10 +75,11 @@ function Addtask() {
           if(localStorage.getItem('schedule')==="")
           localStorage.setItem('schedule',"");
           else
-          localStorage.setItem("schedule", value);
+          localStorage.setItem("schedule", value.toDateString());
           handlesubmittask(task.title, task.description);
           settask({ title: "", description: "" });
-          localStorage.setItem("schedule",new Date());
+          localStorage.setItem("schedule",new Date().toDateString());
+          
         }}
       >
         Add Task

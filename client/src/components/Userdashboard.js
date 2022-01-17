@@ -14,14 +14,18 @@ import Addproject from './Addproject'
 import CreateProject from './CreateProject'
 function Userdashboard() {
   const [value, onChange1] = useState(new Date());
-       
+       const gettoday=()=>{
+         var date=new Date().toDateString();
+         return date;
+         
+       }
         let date=new Date();
             date=date.toDateString()
             const ref=useRef(null)
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel}=context;
+           const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel,getScheduleNoteweek}=context;
     //    console.log(visible);
     const onchange=(e)=>{
         setnote({...note,[e.target.name]:e.target.value})
@@ -35,13 +39,14 @@ function Userdashboard() {
       if(localStorage.getItem('schedule')==="")
       localStorage.setItem('schedule',"");
       else
-      localStorage.setItem("schedule", value);
+      localStorage.setItem("schedule", value.toDateString());
        
 
        await editNote(note.id,note.etitle,note.edescription);
-        
+        if(localStorage.getItem('projectname')==="Today"){
+       localStorage.setItem("schedule", new Date().toDateString());
+       getScheduleNote();}
         refClose.current.click()                                         
-        localStorage.setItem("schedule", new Date());
         // props.showAlert("Updated Successfully","success");
       }
      
@@ -87,7 +92,7 @@ function Userdashboard() {
                     <div><img src={calender} alt="calender" /></div>&emsp;
                     <div onClick={()=>{
                       localStorage.setItem("projectname","Today")
-                      localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
+                      localStorage.setItem("schedule",gettoday());
                       getScheduleNote();
                       localStorage.setItem("projectId","61d1719194c87b7ff0486240");
  
@@ -97,8 +102,10 @@ function Userdashboard() {
                     Today
                      </div></div>
                     <div className="d-flex my-2"><div><img src={upcoming} alt="upcoming" /></div>&emsp;
-                    <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
-                    Upcoming
+                    <div onClick={()=>{ getScheduleNoteweek();
+                      localStorage.setItem("projectname","In a Week")
+                    }} style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                    In a Week
                      </div></div>
                     
                 </div>
@@ -131,7 +138,7 @@ function Userdashboard() {
                     <div><img src={calender} alt="calender" /></div>&emsp;
                     <div onClick={()=>{
                       localStorage.setItem("projectname","Today")
-                      localStorage.setItem("schedule",new Date().setHours(5,30,0,0,0));
+                      localStorage.setItem("schedule",gettoday());
                       getScheduleNote();
  localStorage.setItem("projectId","61d1719194c87b7ff0486240");
 // getNote();
@@ -140,8 +147,9 @@ function Userdashboard() {
                     Today
                      </div></div>
                     <div className="d-flex my-2"><div><img src={upcoming} alt="upcoming" /></div>&emsp;
-                    <div  style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
-                    Upcoming
+                    <div onClick={()=>{getScheduleNoteweek();
+                    localStorage.setItem("projectname","In a Week")}} style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
+                    In a Week
                      </div></div>
                 </div>
                 <Addproject />

@@ -2,8 +2,8 @@ import React,{useState} from "react";
 import noteContext from "./TasksContext";
 
 const NoteState=(props)=>{
-    const host="https://manager7z2.herokuapp.com";
-    // const host="http://localhost:5000";
+    // const host="https://manager7z2.herokuapp.com";
+    const host="http://localhost:5000";
    const notesInitial=[
    
   ]
@@ -56,6 +56,34 @@ const getScheduleNote=async()=>{
    });
  //   const json =response.json(); 
      const json =await response.json()
+    // console.log(json);
+    setNotes(json)
+    
+    setLoading(false);
+ }
+
+const getScheduleNoteweek=async()=>{
+  //api call
+   
+  setLoading(true);
+  const response = await fetch(`${host}/api/task/fetchallduetasksweek`, {
+     method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    
+     headers: {
+       'Content-Type': 'application/json',
+      //  "auth-token":localStorage.getItem('token')
+      // 'schedule':localStorage.getItem('schedule'),
+      
+     }
+    
+     
+   });
+ //   const json =response.json(); 
+     const json =await response.json()
+
+    //  json.map((e)=>{
+
+    //  })
     // console.log(json);
     setNotes(json)
     
@@ -359,7 +387,7 @@ const handlecancel=()=>{
 
     
     return (
-        <noteContext.Provider value={{project,proname,notes,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{project,proname,notes,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )
