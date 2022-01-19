@@ -4,7 +4,7 @@ import calender from './calendar.png'
 import upcoming from './upcoming.png'
 import home from './home.png'
 import Addtask from './Addtask';
-
+// import FileBase64 from 'react-file-base64';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import TasksContext from '../context/tasks/TasksContext';
@@ -22,6 +22,8 @@ function Userdashboard() {
         let date=new Date();
             date=date.toDateString()
             const ref=useRef(null)
+            const refquick=useRef(null)
+            // const [dp, setDp] = useState("");
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
@@ -123,6 +125,15 @@ function Userdashboard() {
             <nav  style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"44px",backgroundColor:"#db4c3f"}}>
               
             <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
+            {/* <div style={{marginLeft:"58vw"}}>
+              
+            <FileBase64 type="file" id="fileupload"  multiple={false} onDone={( base64 ) => setDp(base64.base64)} />
+            </div>
+            <div>
+              <button onClick={()=>{addMedia(dp);
+                                     }} >submit</button>
+            </div> */}
+            <div onClick={()=>{refquick.current.click()}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
             </nav>
             <div   className='d-flex '>
             <div className='mainnav' style={{overflow:"scroll",height:"100vh",width:"289px",backgroundColor:"#f4f1f1"}}>
@@ -194,6 +205,31 @@ function Userdashboard() {
                 
             </div>
             </div>
+
+           
+<button ref={refquick} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#quickadd">
+  Launch demo modal
+</button>
+
+
+<div className="modal fade" id="quickadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Quick Add</h5>
+        <button  type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        <Addtask/>
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
             <button ref={ref} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#exampleModal">

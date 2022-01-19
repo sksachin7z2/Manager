@@ -384,10 +384,36 @@ setProgress(70);
 const handlecancel=()=>{
   setvisible(false);
 }
+//media 
+const addMedia=async(selectedpic)=>{
+  //api call
+  
+  let media=selectedpic;
+  media=media.toString();
+  console.log(typeof(media), media);
+  setLoading(true);
+  const response = await fetch(`${host}/api/media/addmedia`, {
+     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    
+     headers: {
+       'Content-Type': 'application/json',
+      //  'projectId':localStorage.getItem('projectId'),
+      //  'schedule':localStorage.getItem('schedule')
+       // "auth-token":localStorage.getItem('token')
+     },
+     body: JSON.stringify({media})
+     
+   });
+ 
+   const json = await response.json(); 
+ 
+ console.log(json)
+   
+ }
 
     
     return (
-        <noteContext.Provider value={{project,proname,notes,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )

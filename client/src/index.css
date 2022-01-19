@@ -31,6 +31,18 @@ body{
  
   color: brown;
 }
+.btnp1:hover{
+ cursor: pointer;
+  color: white;
+}
+.btnp1{
+  border:2px solid white;
+  padding: 0px 5px;
+  border-radius: 9px;
+  position: relative;
+  left: 72vw;
+
+}
 .hover-cursor:hover{
   cursor: pointer;
 }
