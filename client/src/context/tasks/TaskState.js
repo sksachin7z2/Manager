@@ -54,7 +54,7 @@ const getScheduleNote=async()=>{
     
      headers: {
        'Content-Type': 'application/json',
-      //  "auth-token":localStorage.getItem('token')
+       "auth-token":localStorage.getItem('token'),
       'schedule':localStorage.getItem('schedule'),
       
      }
@@ -78,7 +78,7 @@ const getScheduleNoteweek=async()=>{
     
      headers: {
        'Content-Type': 'application/json',
-      //  "auth-token":localStorage.getItem('token')
+       "auth-token":localStorage.getItem('token')
       // 'schedule':localStorage.getItem('schedule'),
       
      }

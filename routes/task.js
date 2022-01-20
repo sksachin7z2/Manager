@@ -18,9 +18,9 @@ router.get("/fetchalltasks",fetchproject,fetchuser, async (req, res) => {
   }
 });
 //Route 1 get all the notes in User detail using :GET "/api/notes/fetchallnotes".login requiered
-router.get("/fetchallduetasks",fetchschedule, async (req, res) => {
+router.get("/fetchallduetasks",fetchuser,fetchschedule, async (req, res) => {
   try {
-    const tasks = await Task.find({schedule:req.schedule});
+    const tasks = await Task.find({schedule:req.schedule,user:req.user.id});
     res.json(tasks);
   } catch (error) {
     console.error(error.message);
@@ -59,13 +59,13 @@ let week=()=>{
 }
 
 let total=[],i;
-router.get("/fetchallduetasksweek",fetchscheduleweek, async (req, res) => {
+router.get("/fetchallduetasksweek",fetchuser,fetchscheduleweek, async (req, res) => {
   try {
     // const a=[Sun,Mon,Tue,Wed,Thu,Fri,Sat];
     
     for(i=0;i<7;i++){
       week();
-     let tasks = await Task.find({schedule:d.toDateString() })
+     let tasks = await Task.find({schedule:d.toDateString(),user:req.user.id })
      total=total.concat(tasks)
    
     //  console.log(d.toDateString())
