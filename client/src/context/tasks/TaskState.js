@@ -417,10 +417,12 @@ const addMedia=async(selectedpic)=>{
  console.log(json)
    
  }
-
+const handlec=()=>{
+  setvisible(false);
+}
     
     return (
-        <noteContext.Provider value={{evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )

@@ -12,7 +12,7 @@ var getdate=()=>{
   var date=props.task.schedule;
   var date1;
   if(date!==""){
-   date1= date.slice(0,10);
+   date1= date;
   }
  else
  date1="No due date"

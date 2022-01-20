@@ -102,11 +102,12 @@ function Addtask() {
         >
           No due date
         </span>
-        <div
-          onClick={() => {
+        <span className="hover-cursor" style={{color:"black",position:"relative",left:"7em"}} onClick={() => {
              
-            document.getElementById("calenderr").classList.add("dipnone");
-          }}
+             document.getElementById("calenderr").classList.add("dipnone");
+           }}>X</span>
+        <div
+          
         >
           <Calendar onChange={onChange1} value={value} />
         </div>

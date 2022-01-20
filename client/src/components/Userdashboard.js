@@ -31,8 +31,8 @@ function Userdashboard() {
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel,getScheduleNoteweek}=context;
-           
+           const {handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel,getScheduleNoteweek}=context;
+          
     //    console.log(visible);
     const onchange=(e)=>{
         setnote({...note,[e.target.name]:e.target.value})
@@ -145,7 +145,7 @@ function Userdashboard() {
               <button onClick={()=>{addMedia(dp);
                                      }} >submit</button>
             </div> */}
-            <div onClick={()=>{refquick.current.click()}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
+            <div onClick={()=>{refquick.current.click();handlec()}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
             <button style={{position:"absolute",right:"1em"}} onClick={()=>{localStorage.removeItem('token');navigate('/')}} className='btn btn-primary'>Logout</button>
             </nav>
             <div   className='d-flex '>
@@ -232,7 +232,7 @@ function Userdashboard() {
         <h5 className="modal-title" id="exampleModalLabel">Quick Add</h5>
         <button  type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div className="modal-body">
+      <div style={{height:"19em"}} className="modal-body">
         <Addtask/>
       </div>
       <div className="modal-footer">
@@ -245,12 +245,12 @@ function Userdashboard() {
 
 
 
-            <button ref={ref} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button ref={ref} type="button" className="btn btn-primary d-none"  data-bs-toggle="modal" data-bs-target="#updatee">
   Launch demo modal
 </button>
 
 
-<div  className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div  className="modal fade" id="updatee" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
@@ -258,7 +258,7 @@ function Userdashboard() {
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
-      <form>
+      <form style={{height:"26em"}}>
   <div className="mb-3">
     <label  htmlFor="etitle" className="form-label ">Title</label>
     <input type="text" value={note.etitle} className="form-control" id="etitle" name="etitle" aria-describedby="emailHelp"onChange={onchange}/>
@@ -269,11 +269,11 @@ function Userdashboard() {
     <textarea name="edescription" id="edescription" className="form-control" cols="30" rows="10"  value={note.edescription} onChange={onchange} minLength={2} required/>
    
   </div>
-  <span  onClick={()=>{document.getElementById('calenderr').classList.remove('dipnone')
+  <span  onClick={()=>{document.getElementById('calenderr1').classList.remove('dipnone1')
                               }} className="badge bg-primary hover-cursor">Schedule</span>
     <div
-        className="calendar dipnone"
-        id="calenderr"
+        className="calendar1 dipnone1"
+        id="calenderr1"
         
         // onClicklocalStorage.setItem("schedule", value.setHours(5, 30, 0, 0, 0));
       >
@@ -281,17 +281,18 @@ function Userdashboard() {
           onClick={() => {
             
             localStorage.setItem("schedule", "");
-            document.getElementById("calenderr").classList.add("dipnone");
+            document.getElementById("calenderr1").classList.add("dipnone1");
           }}
           className="badge bg-success hover-cursor m-3"
         >
           No due date
         </span>
-        <div
-          onClick={() => {
+        <span className="hover-cursor" style={{color:"black",position:"relative",left:"7em"}} onClick={() => {
              
-            document.getElementById("calenderr").classList.add("dipnone");
-          }}
+             document.getElementById("calenderr1").classList.add("dipnone1");
+           }}>X</span>
+        <div
+         
         >
           <Calendar onChange={onChange1} value={value} />
         </div>
