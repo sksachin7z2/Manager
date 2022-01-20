@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import {
   HashRouter as Router,
   Routes,
@@ -12,6 +12,8 @@ import Home from './components/Home';
 import Userdashboard from './components/Userdashboard';
 import React,{useEffect} from 'react'
 import TaskState from './context/tasks/TaskState';
+import Login from './components/Login';
+import Signup from './components/Signup'
 function App() {
   useEffect(() => {
        
@@ -21,6 +23,9 @@ function App() {
   
     // eslint-disable-next-line
 }, [])
+
+// const host="http://localhost:5000";
+const host="https://manager7z2.herokuapp.com"
   return (
     <TaskState>
     <Router>
@@ -30,7 +35,10 @@ function App() {
           {/* <Route exact path="/signup" key="signup" element={<Signup/>}/>
           <Route exact path="/login" key="login" element={<Login />}/> */}
           <Route exact path="/contact" key="contact" element={<Contact/>}/>
-      
+          
+          <Route exact path="/contact" key="contact" element={<Contact/>}/>
+          <Route exact path="/login" key="login" element={<Login host={host}/>}/>
+          <Route exact path="/signup" key="signup" element={<Signup host={host}/>}/>
           <Route exact path="/about"  key="about" element={<About/>}/>
           <Route exact path="/user"  key="user" element={<Userdashboard/>}/>
    </Routes>

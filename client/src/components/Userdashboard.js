@@ -3,6 +3,7 @@ import inbox from './inbox.png'
 import calender from './calendar.png'
 import upcoming from './upcoming.png'
 import home from './home.png'
+// import { useNavigate } from 'react-router-dom';
 import Addtask from './Addtask';
 // import FileBase64 from 'react-file-base64';
 import Calendar from 'react-calendar';
@@ -12,13 +13,16 @@ import Tasks from './Tasks';
 import {Link} from 'react-router-dom'
 import Addproject from './Addproject'
 import CreateProject from './CreateProject'
+import {useNavigate} from 'react-router-dom'
 function Userdashboard() {
+  let navigate=useNavigate()
   const [value, onChange1] = useState(new Date());
        const gettoday=()=>{
          var date=new Date().toDateString();
          return date;
          
        }
+      //  let navigate=useNavigate();
         let date=new Date();
             date=date.toDateString()
             const ref=useRef(null)
@@ -28,6 +32,7 @@ function Userdashboard() {
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
            const {visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel,getScheduleNoteweek}=context;
+           
     //    console.log(visible);
     const onchange=(e)=>{
         setnote({...note,[e.target.name]:e.target.value})
@@ -55,12 +60,19 @@ function Userdashboard() {
       
     useEffect(() => {
        
-      localStorage.setItem("projectname","Inbox");
-      localStorage.setItem("projectId","61d1719194c87b7ff0486240");
+     
      
       
+        if(localStorage.getItem('token')){
+          localStorage.setItem("projectname","Inbox");
+          localStorage.setItem("projectId","61d1719194c87b7ff0486240");
           getNote();
-         
+        
+        }
+        else{
+          navigate("/login")
+        }
+        
         
           // eslint-disable-next-line
       }, [])
@@ -134,6 +146,7 @@ function Userdashboard() {
                                      }} >submit</button>
             </div> */}
             <div onClick={()=>{refquick.current.click()}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
+            <button style={{position:"absolute",right:"1em"}} onClick={()=>{localStorage.removeItem('token');navigate('/')}} className='btn btn-primary'>Logout</button>
             </nav>
             <div   className='d-flex '>
             <div className='mainnav' style={{overflow:"scroll",height:"100vh",width:"289px",backgroundColor:"#f4f1f1"}}>
@@ -212,7 +225,7 @@ function Userdashboard() {
 </button>
 
 
-<div className="modal fade" id="quickadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal fade" id="quickadd" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">

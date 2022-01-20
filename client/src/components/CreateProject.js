@@ -1,12 +1,20 @@
 import React,{useContext,useRef,useState,useEffect} from 'react'
 import downarrow from './down-arrow.png'
 import TasksContext from '../context/tasks/TasksContext';
+import { useNavigate } from 'react-router-dom';
 
 // import CreateProject from './CreateProject'
 import Projects from './Projects'
 function CreateProject(props) {
+  let navigate=useNavigate();
+
         useEffect(() => {
+          if(localStorage.getItem('token')){
             getProject();
+          }
+          else{
+            navigate('/login')
+          }
              // eslint-disable-next-line
         }, [])
 

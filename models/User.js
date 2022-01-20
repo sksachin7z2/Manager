@@ -15,9 +15,7 @@ const { Schema } = mongoose;
        type:String,
        required:true
    },
-   selectedpic:{
-       type:String
-   },
+  
    date:{
        type:Date,
        default:Date.now

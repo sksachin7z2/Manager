@@ -1,9 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 // import noteContext from '../context/notes/NoteContext';
 
 function Navbar() {
-
+    let navigate=useNavigate();
     return (
         <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,21 +23,19 @@ function Navbar() {
         <li className="nav-item">
           <Link  className="nav-link active"to="/contact">Contact</Link>
         </li>
-        <li className="nav-item">
-          <Link   className="nav-link active"to="/user">dasboard</Link>
-        </li>
+       
        
        
       </ul>
     
-      <form className="d-flex">
+     {(!localStorage.getItem("token"))? <form className="d-flex">
       <Link  className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
       <Link   className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
-      </form>:<div><button  className="btn btn-primary" >Logout</button>&emsp;
+      </form>:<button onClick={()=>{navigate('/user')}} className='btn btn-primary'>Dashboard</button>}
               
     </div>
   </div>
-  </div>
+ 
 </nav>
         </div>
     )

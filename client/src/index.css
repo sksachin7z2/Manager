@@ -36,11 +36,11 @@ body{
   color: white;
 }
 .btnp1{
-  border:2px solid white;
-  padding: 0px 5px;
-  border-radius: 9px;
-  position: relative;
-  left: 72vw;
+  border: 2px solid white;
+    padding: 0px 5px;
+    border-radius: 9px;
+    position: absolute;
+    right: 10em;
 
 }
 .hover-cursor:hover{
@@ -65,6 +65,17 @@ body{
 }
 .dipnone{
   display:none;
+}
+.app1{
+  
+  position: relative;
+  width: 22rem;
+  top: 4rem;
+  border: 2px solid black;
+  border-radius: 1rem;
+  margin: 0 auto;
+  padding: 2rem;
+  
 }
 
 @media screen and (max-width: 793px) {

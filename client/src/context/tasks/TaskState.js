@@ -2,8 +2,8 @@ import React,{useState} from "react";
 import noteContext from "./TasksContext";
 
 const NoteState=(props)=>{
-    // const host="https://manager7z2.herokuapp.com";
-    const host="http://localhost:5000";
+    const host="https://manager7z2.herokuapp.com";
+    // const host="http://localhost:5000";
    const notesInitial=[
    
   ]
@@ -11,22 +11,26 @@ const NoteState=(props)=>{
     const [visible, setvisible] = useState(false);
     const [proname, setproname] = useState("");
   const [progress, setProgress] = useState(0);
+  const [IsMounted, setIsMounted] = useState(true);
 
 const [notes, setNotes] = useState(notesInitial);
 // const [scheduletask, setscheduletask] = useState(notesInitial);
 const [project, setProject] = useState(notesInitial);
 //get a note
+
 const getNote=async()=>{
   //api call
    
   setLoading(true);
+    setIsMounted(true)
   const response = await fetch(`${host}/api/task/fetchalltasks`, {
      method: 'GET', // *GET, POST, PUT, DELETE, etc.
     
      headers: {
        'Content-Type': 'application/json',
-      //  "auth-token":localStorage.getItem('token')
+       "auth-token":localStorage.getItem('token'),
       'projectId':localStorage.getItem('projectId')
+      
      }
     
      
@@ -34,9 +38,12 @@ const getNote=async()=>{
  //   const json =response.json(); 
      const json =await response.json()
     // console.log(json);
-    setNotes(json)
+    if (IsMounted) setNotes(json)
     
     setLoading(false);
+ }
+ const evamount=()=>{
+   setIsMounted(false);
  }
 const getScheduleNote=async()=>{
   //api call
@@ -101,8 +108,8 @@ const addNote=async(title,description)=>{
     headers: {
       'Content-Type': 'application/json',
       'projectId':localStorage.getItem('projectId'),
-      'schedule':localStorage.getItem('schedule')
-      // "auth-token":localStorage.getItem('token')
+      'schedule':localStorage.getItem('schedule'),
+      "auth-token":localStorage.getItem('token')
     },
     body: JSON.stringify({title,description})
     
@@ -144,7 +151,7 @@ const editNote=async(id,title,description)=>{
        
         headers: {
           'Content-Type': 'application/json',
-          // "auth-token":localStorage.getItem('token')
+          // "auth-token":localStorage.getItem('token'),
           'projectId':localStorage.getItem('projectId'),
           // 'schedule':localStorage.getItem('schedule')
       'schedule':localStorage.getItem('schedule')
@@ -242,7 +249,7 @@ const getProject=async()=>{
     
      headers: {
        'Content-Type': 'application/json',
-      //  "auth-token":localStorage.getItem('token')
+       "auth-token":localStorage.getItem('token')
       // 'projectId':localStorage.getItem('projectId')
      }
     
@@ -267,7 +274,7 @@ const addProject=async(name)=>{
     headers: {
       'Content-Type': 'application/json',
       // 'projectId':localStorage.getItem('projectId'),
-      // "auth-token":localStorage.getItem('token')
+      "auth-token":localStorage.getItem('token')
     },
     body: JSON.stringify({name})
     
@@ -309,7 +316,7 @@ const editProject=async(id,name)=>{
        
         headers: {
           'Content-Type': 'application/json',
-          // "auth-token":localStorage.getItem('token')
+          "auth-token":localStorage.getItem('token')
           // 'projectId':localStorage.getItem('projectId')
         },
        
@@ -371,7 +378,7 @@ setProgress(70);
    
     headers: {
       'Content-Type': 'application/json',
-      // "auth-token":localStorage.getItem('token')
+      "auth-token":localStorage.getItem('token')
     }
   });
   const json2 =await response2.json(); 
@@ -413,7 +420,7 @@ const addMedia=async(selectedpic)=>{
 
     
     return (
-        <noteContext.Provider value={{project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )

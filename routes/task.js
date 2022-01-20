@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// var fetchuser = require("../middleware/fetchuser");
+var fetchuser = require("../middleware/fetchuser");
 const Task = require("../models/Task");
 const { body, validationResult } = require("express-validator");
 const fetchproject = require("../middleware/fetchproject");
@@ -8,9 +8,9 @@ const fetchschedule = require("../middleware/fetchschedule");
 const fetchscheduleweek = require("../middleware/fetchscheduleweek");
 
 //Route 1 get all the notes in User detail using :GET "/api/notes/fetchallnotes".login requiered
-router.get("/fetchalltasks",fetchproject, async (req, res) => {
+router.get("/fetchalltasks",fetchproject,fetchuser, async (req, res) => {
   try {
-    const tasks = await Task.find({project:req.project});
+    const tasks = await Task.find({project:req.project,user:req.user.id});
     res.json(tasks);
   } catch (error) {
     console.error(error.message);
@@ -81,7 +81,7 @@ router.get("/fetchallduetasksweek",fetchscheduleweek, async (req, res) => {
 });
 //Route 2 to add new notes in User detail using :POST "/api/notes/addnote".login requiered
 router.post(
-  "/addtask",fetchproject,
+  "/addtask",fetchuser,fetchproject,
   
   [
     body("title", "enter the valid title").isLength({ min: 1 }),
@@ -90,6 +90,7 @@ router.post(
   ],
   async (req, res) => {
     try {
+      console.log("done",req.user.id)
       const { title, description} = req.body;
       const schedule = req.header('schedule');
 
@@ -103,6 +104,7 @@ router.post(
         description,
         schedule,
         project: req.project,
+        user:req.user.id,
       });
       const savedTask = await task.save();
 

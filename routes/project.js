@@ -5,9 +5,9 @@ const Project = require("../models/Project");
 const { body, validationResult } = require("express-validator");
 
 //Route 1 get all the notes in User detail using :GET "/api/notes/fetchallnotes".login requiered
-router.get("/fetchallproject", async (req, res) => {
+router.get("/fetchallproject",fetchuser, async (req, res) => {
   try {
-    const project = await Project.find();
+    const project = await Project.find({ user: req.user.id });
     res.json(project);
   } catch (error) {
     console.error(error.message);
@@ -17,7 +17,7 @@ router.get("/fetchallproject", async (req, res) => {
 //Route 2 to add new notes in User detail using :POST "/api/notes/addnote".login requiered
 router.post(
   "/addproject",
-  
+  fetchuser,
   [
     body("name", "enter the valid name").isLength({ min: 1 }),
    
@@ -33,7 +33,7 @@ router.post(
       }
       const project = new Project({
        name,
-        // user: req.user.id,
+        user: req.user.id,
       });
       const savedProject = await project.save();
 
@@ -45,7 +45,7 @@ router.post(
   }
 );
 //Route 3 to update  notes in User detail using :PUT: "/api/notes/updatenote".login requiered
-router.put("/updateproject/:id", async (req, res) => {
+router.put("/updateproject/:id",fetchuser, async (req, res) => {
   const { name} = req.body;
   try {
     //create a newNote object
@@ -59,9 +59,9 @@ router.put("/updateproject/:id", async (req, res) => {
     if (!project) {
       return res.status(404).send("Not found");
     }
-    // if (task.user.toString() !== req.user.id) {
-    //   return res.status(401).send("not authorised");
-    // }
+    if (task.user.toString() !== req.user.id) {
+      return res.status(401).send("not authorised");
+    }
    project = await Project.findByIdAndUpdate(
       req.params.id,
       { $set: newProject },
@@ -74,7 +74,7 @@ router.put("/updateproject/:id", async (req, res) => {
   }
 });
 //Route 4 to delte a note in User detail using :DELETE: "/api/notes/deletenote".login requiered
-router.delete("/deleteproject/:id", async (req, res) => {
+router.delete("/deleteproject/:id",fetchuser, async (req, res) => {
 
   try {
     //find the note to be delted and deleted it
@@ -83,9 +83,9 @@ router.delete("/deleteproject/:id", async (req, res) => {
       return res.status(404).send("Not found");
     }
     //allow deletion if owner owns the note
-    // if (task.user.toString() !== req.user.id) {
-    //   return res.status(401).send("not authorised");
-    // }
+    if (task.user.toString() !== req.user.id) {
+      return res.status(401).send("not authorised");
+    }
     project = await Project.findByIdAndDelete(req.params.id);
     res.json({ success: "Project has been deleted", project: project });
   } catch (error) {
@@ -93,7 +93,7 @@ router.delete("/deleteproject/:id", async (req, res) => {
     res.status(500).send("Internal Server Error Occured");
   }
 });
-router.delete("/deleteallprojects", async (req, res) => {
+router.delete("/deleteallprojects",fetchuser, async (req, res) => {
 
   try {
     //find the note to be delted and deleted it
@@ -102,9 +102,9 @@ router.delete("/deleteallprojects", async (req, res) => {
       return res.status(404).send("Not found");
     }
     //allow deletion if owner owns the note
-    // if (projects[0].user.toString() !== req.user.id) {
-    //   return res.status(401).send("not authorised");
-    // }
+    if (projects[0].user.toString() !== req.user.id) {
+      return res.status(401).send("not authorised");
+    }
    
     while(projects!==null)
     projects = await Project.findOneAndDelete() ;
