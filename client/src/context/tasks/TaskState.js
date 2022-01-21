@@ -348,7 +348,7 @@ const deleteProject=async(id)=>{
    
     headers: {
       'Content-Type': 'application/json',
-      // "auth-token":localStorage.getItem('token')
+      "auth-token":localStorage.getItem('token'),
       'projectId':localStorage.getItem('projectId')
     }
    

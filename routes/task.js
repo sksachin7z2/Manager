@@ -90,7 +90,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      console.log("done",req.user.id)
+      // console.log("done",req.user.id)
       const { title, description} = req.body;
       const schedule = req.header('schedule');
 

@@ -59,7 +59,7 @@ router.put("/updateproject/:id",fetchuser, async (req, res) => {
     if (!project) {
       return res.status(404).send("Not found");
     }
-    if (task.user.toString() !== req.user.id) {
+    if (project.user.toString() !== req.user.id) {
       return res.status(401).send("not authorised");
     }
    project = await Project.findByIdAndUpdate(
@@ -83,7 +83,7 @@ router.delete("/deleteproject/:id",fetchuser, async (req, res) => {
       return res.status(404).send("Not found");
     }
     //allow deletion if owner owns the note
-    if (task.user.toString() !== req.user.id) {
+    if (project.user.toString() !== req.user.id) {
       return res.status(401).send("not authorised");
     }
     project = await Project.findByIdAndDelete(req.params.id);
