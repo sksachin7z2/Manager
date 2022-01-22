@@ -17,6 +17,7 @@ import {useNavigate} from 'react-router-dom'
 function Userdashboard() {
   let navigate=useNavigate()
   const [value, onChange1] = useState(new Date());
+  const [quick, setQuick] = useState(false);
        const gettoday=()=>{
          var date=new Date().toDateString();
          return date;
@@ -31,7 +32,7 @@ function Userdashboard() {
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,handlecancel,getScheduleNoteweek}=context;
+           const {handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
           
     //    console.log(visible);
     const onchange=(e)=>{
@@ -145,7 +146,7 @@ function Userdashboard() {
               <button onClick={()=>{addMedia(dp);
                                      }} >submit</button>
             </div> */}
-            <div onClick={()=>{refquick.current.click();handlec()}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
+            <div onClick={()=>{refquick.current.click();handlec();setQuick(true)}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
             <button style={{position:"absolute",right:"1em"}} onClick={()=>{localStorage.removeItem('token');navigate('/')}} className='btn btn-primary'>Logout</button>
             </nav>
             <div   className='d-flex '>
@@ -198,23 +199,7 @@ function Userdashboard() {
                      Add Task
                      </div>
                 </div>}
-               {visible && <button
-        style={{
-          border: "none",
-          fontWeight: "bolder",
-          marginLeft: "1.5rem",
-          backgroundColor: "antiquewhite",
-          borderRadius: "9px",
-          padding: "3px",
-        }}
-        
-        className="hover-cursor"
-        onClick={
-            handlecancel
-        }
-      >
-        Cancel
-      </button>}
+              
                 
             </div>
             </div>
@@ -233,7 +218,7 @@ function Userdashboard() {
         <button  type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div style={{height:"19em"}} className="modal-body">
-        <Addtask/>
+        <Addtask quick={quick}/>
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

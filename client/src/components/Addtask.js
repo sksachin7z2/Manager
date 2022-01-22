@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import TasksContext from "../context/tasks/TasksContext";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-function Addtask() {
+function Addtask(props) {
   const [value, onChange1] = useState(new Date());
   // const [value1, onChange2] = useState("");
   // const [value1, onChange1] = useState(null);
 
   const context = useContext(TasksContext);
-  const { handlesubmittask } = context;
+  const { handlesubmittask,handlecancel } = context;
 
   const [task, settask] = useState({
     title: "",
@@ -84,7 +84,23 @@ function Addtask() {
       >
         Add Task
       </button>
-     
+     {!props.quick && <button
+        style={{
+          border: "none",
+          fontWeight: "bolder",
+          marginLeft: "1.5rem",
+          backgroundColor: "antiquewhite",
+          borderRadius: "9px",
+          padding: "3px",
+        }}
+        
+        className="hover-cursor"
+        onClick={
+            handlecancel
+        }
+      >
+        Cancel
+      </button>}
 
       <div 
         className="calendar dipnone"
