@@ -2,8 +2,8 @@ import React,{useState} from "react";
 import noteContext from "./TasksContext";
 
 const NoteState=(props)=>{
-    const host="https://manager7z2.herokuapp.com";
-    // const host="http://localhost:5000";
+    // const host="https://manager7z2.herokuapp.com";
+    const host="http://localhost:5000";
    const notesInitial=[
    
   ]
@@ -12,6 +12,7 @@ const NoteState=(props)=>{
     const [proname, setproname] = useState("");
   const [progress, setProgress] = useState(0);
   const [IsMounted, setIsMounted] = useState(true);
+  const [dp1, setDp] = useState([]);
 
 const [notes, setNotes] = useState(notesInitial);
 // const [scheduletask, setscheduletask] = useState(notesInitial);
@@ -396,7 +397,7 @@ const addMedia=async(selectedpic)=>{
   //api call
   
   let media=selectedpic;
-  media=media.toString();
+  // media=media.toString();
   console.log(typeof(media), media);
   setLoading(true);
   const response = await fetch(`${host}/api/media/addmedia`, {
@@ -414,15 +415,38 @@ const addMedia=async(selectedpic)=>{
  
    const json = await response.json(); 
  
+ setDp(dp1.concat(json));
  console.log(json)
    
+ }
+ const getdp=async()=>{
+  setLoading(true);
+  
+const response = await fetch(`${host}/api/media/getmedia`, {
+   method: 'GET', // *GET, POST, PUT, DELETE, etc.
+  
+   headers: {
+     'Content-Type': 'application/json',
+    //  "auth-token":localStorage.getItem('token'),
+    // 'projectId':localStorage.getItem('projectId')
+    
+   }
+  
+   
+ });
+//   const json =response.json(); 
+   const json =await response.json()
+  // console.log(json);
+  setDp(json);
+  
+  setLoading(false);
  }
 const handlec=()=>{
   setvisible(false);
 }
     
     return (
-        <noteContext.Provider value={{handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{dp1,getdp,handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )

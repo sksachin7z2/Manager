@@ -5,13 +5,14 @@ import upcoming from './upcoming.png'
 import home from './home.png'
 // import { useNavigate } from 'react-router-dom';
 import Addtask from './Addtask';
-// import FileBase64 from 'react-file-base64';
+import FileBase from 'react-file-base64';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import TasksContext from '../context/tasks/TasksContext';
 import Tasks from './Tasks';
 import {Link} from 'react-router-dom'
 import Addproject from './Addproject'
+import Dp from './Dp'
 import CreateProject from './CreateProject'
 import {useNavigate} from 'react-router-dom'
 function Userdashboard() {
@@ -28,11 +29,12 @@ function Userdashboard() {
             date=date.toDateString()
             const ref=useRef(null)
             const refquick=useRef(null)
-            // const [dp, setDp] = useState("");
+            const refdp=useRef(null)
+            const [dp, setDp] = useState("");
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
+           const {dp1,getdp,addMedia,handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
           
     //    console.log(visible);
     const onchange=(e)=>{
@@ -68,7 +70,7 @@ function Userdashboard() {
           localStorage.setItem("projectname","Inbox");
           localStorage.setItem("projectId","61d1719194c87b7ff0486240");
           getNote();
-        
+            getdp();
         }
         else{
           navigate("/login")
@@ -138,14 +140,38 @@ function Userdashboard() {
             <nav  style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"44px",backgroundColor:"#db4c3f"}}>
               
             <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
-            {/* <div style={{marginLeft:"58vw"}}>
-              
-            <FileBase64 type="file" id="fileupload"  multiple={false} onDone={( base64 ) => setDp(base64.base64)} />
+          
+            <div style={{position:"absolute",right:"14em"}} id="profile" className='dp' >
+                  {dp1.map((dp)=>{
+                     
+                    // document.getElementById("profile").innerHTML=image;
+
+                   return <Dp key={dp._id} image={dp.selectedpic}/>
+
+                  })}
+                  {/* <img src={dp1[0].selectedpic} alt="" width="100%" /> */}
             </div>
-            <div>
-              <button onClick={()=>{addMedia(dp);
-                                     }} >submit</button>
-            </div> */}
+           
+           <div className='editprofile ' >
+          <div style={{width:"7em"}}> {dp1.map((dp)=>{
+                     
+                     // document.getElementById("profile").innerHTML=image;
+ 
+                    return <Dp key={dp._id} image={dp.selectedpic}/>
+ 
+                   })}</div>
+                   <div style={{display:"flex",flexDirection:"column",marginLeft:"2em"}}>
+              <FileBase type="file" id="fileupload"  multiple={false} onDone={( base64 ) => setDp(base64.base64)} />
+             <br />
+              <div>
+                <button className='btn btn-success'  onClick={()=>{addMedia(dp);
+                                       }} >Upload</button>&emsp;
+                <button className='btn btn-success'  onClick={()=>{addMedia(dp);
+                                       }} >Delete</button>
+              </div>
+              </div>
+             
+           </div>
             <div onClick={()=>{refquick.current.click();handlec();setQuick(true)}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
             <button style={{position:"absolute",right:"1em"}} onClick={()=>{localStorage.removeItem('token');navigate('/')}} className='btn btn-primary'>Logout</button>
             </nav>

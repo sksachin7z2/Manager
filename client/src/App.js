@@ -24,8 +24,8 @@ function App() {
     // eslint-disable-next-line
 }, [])
 
-// const host="http://localhost:5000";
-const host="https://manager7z2.herokuapp.com"
+const host="http://localhost:5000";
+// const host="https://manager7z2.herokuapp.com"
   return (
     <TaskState>
     <Router>

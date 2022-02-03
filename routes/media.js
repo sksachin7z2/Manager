@@ -2,6 +2,17 @@ const express =require('express');
 const router=express.Router();
 const Media=require('../models/Media')
 
+
+router.get("/getmedia",async(req,res)=>{
+  try {
+    const dp=  await Media.find();
+    res.json(dp);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error Occured");
+  }
+})
+
 router.post(
     "/addmedia",
     
