@@ -77,13 +77,14 @@ body{
   width: 23px;
 }
 .editprofile{
+  display: none;
   position: absolute;
     top: 4rem;
     right: 2em;
     border: 2px solid hotpink;
     border-radius: 0.5em;
     padding: 30px;
-    display: flex;
+    
     background-color: blanchedalmond;}
 .dipnone{
   display:none;

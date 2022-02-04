@@ -15,6 +15,7 @@ import Addproject from './Addproject'
 import Dp from './Dp'
 import CreateProject from './CreateProject'
 import {useNavigate} from 'react-router-dom'
+import Dpp from './Dpp'
 function Userdashboard() {
   let navigate=useNavigate()
   const [value, onChange1] = useState(new Date());
@@ -29,12 +30,12 @@ function Userdashboard() {
             date=date.toDateString()
             const ref=useRef(null)
             const refquick=useRef(null)
-            const refdp=useRef(null)
+            // const refdp=useRef(null)
             const [dp, setDp] = useState("");
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {dp1,getdp,addMedia,handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
+           const {updatemedia,deletemedia,dp1,getdp,addMedia,handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
           
     //    console.log(visible);
     const onchange=(e)=>{
@@ -141,32 +142,37 @@ function Userdashboard() {
               
             <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
           
-            <div style={{position:"absolute",right:"14em"}} id="profile" className='dp' >
-                  {dp1.map((dp)=>{
+            <div onClick={()=>{document.getElementById("ep").style.display="flex"}} style={{position:"absolute",right:"14em"}} id="profile" className='dp' >
+                  {JSON.stringify(dp1)!=="[]"?dp1.map((dp)=>{
                      
                     // document.getElementById("profile").innerHTML=image;
 
                    return <Dp key={dp._id} image={dp.selectedpic}/>
 
-                  })}
+                  }):<Dpp/>}
+                  
                   {/* <img src={dp1[0].selectedpic} alt="" width="100%" /> */}
             </div>
            
-           <div className='editprofile ' >
-          <div style={{width:"7em"}}> {dp1.map((dp)=>{
+           <div id="ep" className='editprofile' >
+          <div style={{width:"7em"}}>
+            <h5 style={{position:"relative",right:"-26rem",cursor:"pointer"}} onClick={()=>{document.getElementById("ep").style.display="none"}}>X</h5>
+            {JSON.stringify(dp1)!=="[]"?dp1.map((dp)=>{
                      
                      // document.getElementById("profile").innerHTML=image;
  
                     return <Dp key={dp._id} image={dp.selectedpic}/>
  
-                   })}</div>
+                   }):<Dpp/>}</div>
                    <div style={{display:"flex",flexDirection:"column",marginLeft:"2em"}}>
               <FileBase type="file" id="fileupload"  multiple={false} onDone={( base64 ) => setDp(base64.base64)} />
              <br />
               <div>
-                <button className='btn btn-success'  onClick={()=>{addMedia(dp);
-                                       }} >Upload</button>&emsp;
-                <button className='btn btn-success'  onClick={()=>{addMedia(dp);
+               {JSON.stringify(dp1)==='[]'? <button className='btn btn-success'  onClick={()=>{addMedia(dp);
+                                       }} >Upload</button>:
+                <button className='btn btn-success'  onClick={()=>{updatemedia(dp1[0]._id,dp);
+                                       }} >Change</button>}&emsp;
+                <button className='btn btn-danger'  onClick={()=>{deletemedia(dp1[0]._id);
                                        }} >Delete</button>
               </div>
               </div>

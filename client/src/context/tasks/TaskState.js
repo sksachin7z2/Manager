@@ -407,7 +407,7 @@ const addMedia=async(selectedpic)=>{
        'Content-Type': 'application/json',
       //  'projectId':localStorage.getItem('projectId'),
       //  'schedule':localStorage.getItem('schedule')
-       // "auth-token":localStorage.getItem('token')
+       "auth-token":localStorage.getItem('token')
      },
      body: JSON.stringify({media})
      
@@ -427,7 +427,7 @@ const response = await fetch(`${host}/api/media/getmedia`, {
   
    headers: {
      'Content-Type': 'application/json',
-    //  "auth-token":localStorage.getItem('token'),
+     "auth-token":localStorage.getItem('token'),
     // 'projectId':localStorage.getItem('projectId')
     
    }
@@ -436,17 +436,69 @@ const response = await fetch(`${host}/api/media/getmedia`, {
  });
 //   const json =response.json(); 
    const json =await response.json()
-  // console.log(json);
+  console.log(JSON.stringify(json));
   setDp(json);
   
   setLoading(false);
  }
+ const deletemedia=async(id)=>{
+   
+  setLoading(true);
+    const response = await fetch(`${host}/api/media/deletemedia/${id}`, {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+     
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token":localStorage.getItem('token')
+        // 'projectId':localStorage.getItem('projectId')
+      }
+    });
+    const json =await response.json(); 
+    console.log(json)
+    // const newNotes= notes.filter((note)=>{return note._id!==id});/
+    setDp([]);
+    setLoading(false);
+}
+const updatemedia=async(id,selectedpic)=>{
+  //api call
+  
+  setLoading(true);
+  const response = await fetch(`${host}/api/media/updatemedia/${id}`, {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+     
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token":localStorage.getItem('token')
+        // 'projectId':localStorage.getItem('projectId')
+      },
+     
+      body: JSON.stringify({selectedpic})
+    });
+    const json =await response.json(); 
+    console.log(json);
+
+      let newMedia=JSON.parse(JSON.stringify(dp1))
+  //logic to edit
+  for (let index = 0; index < newMedia.length; index++) {
+      const element = newMedia[index];
+      if(element._id===id)
+      {
+        newMedia[index].selectedpic=selectedpic;
+        
+        break;
+      }
+     
+  }
+    setDp(newMedia)
+    setLoading(false);
+}
+
 const handlec=()=>{
   setvisible(false);
 }
     
     return (
-        <noteContext.Provider value={{dp1,getdp,handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{updatemedia,deletemedia,dp1,getdp,handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
             {props.children}
         </noteContext.Provider>
     )
