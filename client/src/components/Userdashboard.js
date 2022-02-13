@@ -147,7 +147,7 @@ function Userdashboard() {
                      
                     // document.getElementById("profile").innerHTML=image;
 
-                   return <Dp key={dp._id} image={dp.selectedpic}/>
+                   return <Dp key={dp._id} image={dp.selectedpic} small={true}/>
 
                   }):<Dpp/>}
                   
@@ -155,8 +155,8 @@ function Userdashboard() {
             </div>
            
            <div id="ep" className='editprofile' >
-          <div style={{width:"7em"}}>
-            <h5 style={{position:"relative",right:"-26rem",cursor:"pointer"}} onClick={()=>{document.getElementById("ep").style.display="none"}}>X</h5>
+          <div style={{display:"flex",alignItems:"center",width:"7em"}}>
+            <h5 style={{position:"relative",right:"-19rem",cursor:"pointer",top:"-4rem"}} onClick={()=>{document.getElementById("ep").style.display="none"}}>X</h5>
             {JSON.stringify(dp1)!=="[]"?dp1.map((dp)=>{
                      
                      // document.getElementById("profile").innerHTML=image;
@@ -164,7 +164,7 @@ function Userdashboard() {
                     return <Dp key={dp._id} image={dp.selectedpic}/>
  
                    }):<Dpp/>}</div>
-                   <div style={{display:"flex",flexDirection:"column",marginLeft:"2em"}}>
+                   <div style={{display:"flex",flexDirection:"column",marginLeft:"2em",width:"172px"}}>
               <FileBase type="file" id="fileupload"  multiple={false} onDone={( base64 ) => setDp(base64.base64)} />
              <br />
               <div>

@@ -83,8 +83,8 @@ body{
     right: 2em;
     border: 2px solid hotpink;
     border-radius: 0.5em;
-    padding: 30px;
-    
+    padding: 40px 9px 30px 9px;
+    max-width: 362px;
     background-color: blanchedalmond;}
 .dipnone{
   display:none;
@@ -110,5 +110,8 @@ body{
   }
   .mainnav{
     display:none;
+  }
+  .editprofile{
+    right:1rem;
   }
 }

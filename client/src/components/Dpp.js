@@ -1,9 +1,9 @@
 import React from 'react';
-import home from './home.png'
+import profile from './profile.png'
 
 function Dpp() {
   return <div>
-       <img src={home} alt="" width="100%" />
+       <img src={profile} alt="" width="100%" />
   </div>;
   
 }
