@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import About from './About'
 import Contact from './Contact'
 import mainp from './mainp.png'
+import Footer from './Footer';
 function Home() {
   let navigate=useNavigate();
 
@@ -26,6 +27,7 @@ function Home() {
        
 
         <Contact/>
+        <Footer/>
         </>
     )
 }

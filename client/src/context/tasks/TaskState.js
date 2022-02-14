@@ -49,7 +49,7 @@ const getNote=async()=>{
 const getScheduleNote=async()=>{
   //api call
    
-  setLoading(true);
+  setProgress(10);
   const response = await fetch(`${host}/api/task/fetchallduetasks`, {
      method: 'GET', // *GET, POST, PUT, DELETE, etc.
     
@@ -62,18 +62,21 @@ const getScheduleNote=async()=>{
     
      
    });
+   setProgress(50);
  //   const json =response.json(); 
      const json =await response.json()
+     setProgress(100);
     // console.log(json);
     setNotes(json)
     
-    setLoading(false);
+    // setLoading(false);
  }
 
 const getScheduleNoteweek=async()=>{
   //api call
    
-  setLoading(true);
+  // setLoading(true);
+  setProgress(10);
   const response = await fetch(`${host}/api/task/fetchallduetasksweek`, {
      method: 'GET', // *GET, POST, PUT, DELETE, etc.
     
@@ -86,20 +89,21 @@ const getScheduleNoteweek=async()=>{
     
      
    });
+   setProgress(50);
 
      const json =await response.json()
 
-   
+     setProgress(100);
     setNotes(json)
     
-    setLoading(false);
+    // setLoading(false);
  }
 
 //Add a note
 const addNote=async(title,description)=>{
  //api call
-    
- setLoading(true);
+ setProgress(10);
+//  setLoading(true);
  const response = await fetch(`${host}/api/task/addtask`, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
    
@@ -112,18 +116,18 @@ const addNote=async(title,description)=>{
     body: JSON.stringify({title,description})
     
   });
-
+  setProgress(50);
   const json = await response.json(); 
 
-
+  setProgress(100);
   setNotes(notes.concat(json))
-  setLoading(false);
+  // setLoading(false);
 }
 
 //delete a note
 const deleteNote=async(id)=>{
-   
-  setLoading(true);
+  setProgress(10);
+  // setLoading(true);
     const response = await fetch(`${host}/api/task/deletetask/${id}`, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
      
@@ -132,17 +136,19 @@ const deleteNote=async(id)=>{
         
       }
     });
+    setProgress(50);
     const json =await response.json(); 
+    setProgress(100);
     console.log(json)
     const newNotes= notes.filter((note)=>{return note._id!==id});
     setNotes(newNotes);
-    setLoading(false);
+    // setLoading(false);
 }
 //Edit a Note
 const editNote=async(id,title,description)=>{
     //api call
-    
-    setLoading(true);
+    setProgress(10);
+    // setLoading(true);
     const response = await fetch(`${host}/api/task/updatetask/${id}`, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
        
@@ -157,7 +163,9 @@ const editNote=async(id,title,description)=>{
        
         body: JSON.stringify({title,description})
       });
+      setProgress(50);
       const json =await response.json(); 
+      setProgress(100);
       console.log(json);
 
         let newNotes=JSON.parse(JSON.stringify(notes))
@@ -176,7 +184,7 @@ const editNote=async(id,title,description)=>{
        
     }
       setNotes(newNotes)
-      setLoading(false);
+      // setLoading(false);
 }
 
 const deleteUser=async(id)=>{
@@ -240,7 +248,7 @@ const fetchtaskstate=()=>{
 const getProject=async()=>{
   //api call
    
-  setLoading(true);
+  // setLoading(true);
   const response = await fetch(`${host}/api/project/fetchallproject`, {
      method: 'GET', // *GET, POST, PUT, DELETE, etc.
     
@@ -257,14 +265,15 @@ const getProject=async()=>{
    
     setProject(json)
     
-    setLoading(false);
+    // setLoading(false);
  }
 
 //Add a note
 const addProject=async(name)=>{
  //api call
  setproname(name);
- setLoading(true);
+ setProgress(10);
+//  setLoading(true);
  const response = await fetch(`${host}/api/project/addproject`, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
    
@@ -276,20 +285,21 @@ const addProject=async(name)=>{
     body: JSON.stringify({name})
     
   });
-
+  setProgress(50);
   const json = await response.json(); 
-
+  setProgress(100);
 
   setProject(project.concat(json))
-  setLoading(false);
+  // setLoading(false);
 }
 
 
 //Edit a Note
 const editProject=async(id,name)=>{
     //api call
+    setProgress(10);
     setproname(name);
-    setLoading(true);
+    // setLoading(true);
     const response = await fetch(`${host}/api/project/updateproject/${id}`, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
        
@@ -301,9 +311,10 @@ const editProject=async(id,name)=>{
        
         body: JSON.stringify({name})
       });
+      setProgress(50);
       const json =await response.json(); 
       console.log(json);
-
+      setProgress(100);
         let newProject=JSON.parse(JSON.stringify(project))
     //logic to edit
     for (let index = 0; index < newProject.length; index++) {
@@ -317,7 +328,7 @@ const editProject=async(id,name)=>{
        
     }
       setProject(newProject)
-      setLoading(false);
+      // setLoading(false);
 }
 
 const deleteProject=async(id)=>{
@@ -393,7 +404,8 @@ const addMedia=async(selectedpic)=>{
    const json = await response.json(); 
  
  setDp(dp1.concat(json));
- console.log(json)
+ console.log(json);
+ setLoading(false);
   }
   else
   alert("Please select .jpg, .jpeg, .png or .gif");
@@ -481,7 +493,7 @@ const handlec=()=>{
 }
     
     return (
-        <noteContext.Provider value={{updatemedia,deletemedia,dp1,getdp,handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate}}>
+        <noteContext.Provider value={{updatemedia,deletemedia,dp1,getdp,handlec,evamount,project,proname,notes,addMedia,getScheduleNoteweek,handlecancel,addNote,getNote,getScheduleNote,deleteNote,editNote,deleteUser,getProject,addProject,editProject,deleteProject,loading,progress,visible,handleaddtask,handlesubmittask,handlesubmitproject,fetchtaskstate,setNotes,setProgress}}>
             {props.children}
         </noteContext.Provider>
     )

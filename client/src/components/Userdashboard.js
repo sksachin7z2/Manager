@@ -14,8 +14,10 @@ import Addproject from './Addproject'
 import Dp from './Dp'
 import CreateProject from './CreateProject'
 import {useNavigate} from 'react-router-dom'
+import LoadingBar from 'react-top-loading-bar'
 import dash from './dash.png'
 import Dpp from './Dpp'
+import Spinner from './Spinner'
 function Userdashboard() {
   let navigate=useNavigate()
   const [value, onChange1] = useState(new Date());
@@ -25,6 +27,10 @@ function Userdashboard() {
          return date;
          
        }
+       function getBackToDescription() { window.scrollTo({
+        top: 0,
+        left: 0, behavior: 'smooth'
+        });        }
       
         let date=new Date();
             date=date.toDateString()
@@ -35,7 +41,7 @@ function Userdashboard() {
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
-           const {updatemedia,deletemedia,dp1,getdp,addMedia,handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
+           const {updatemedia,deletemedia,dp1,getdp,addMedia,handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek,loading,setNotes,progress,setProgress}=context;
           
   
     const onchange=(e)=>{
@@ -63,7 +69,7 @@ function Userdashboard() {
      
       
     useEffect(() => {
-       
+      getBackToDescription();
      
       document.body.style.overflow="hidden";
       
@@ -77,6 +83,7 @@ function Userdashboard() {
           navigate("/login")
         }
         return () => {
+          setNotes([]);
           document.body.style.overflowY="scroll";
         }
         
@@ -85,8 +92,14 @@ function Userdashboard() {
       }, [])
     
     return (
+      <>{loading && <Spinner/>}
         <div>
-
+        <LoadingBar
+        color='white'
+        height={3}
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
             <div className="sidebar">
             
             <div  style={{padding:"3px",borderRadius:"0.3rem",backgroundColor:"#ed8076",position:"absolute",top:"0.45rem",left:"1rem",zIndex:900}}   data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -141,7 +154,7 @@ function Userdashboard() {
 
             </div>
               
-            <nav  style={{display:"flex",alignItems:"center",zIndex:100,height:"44px",backgroundColor:"#db4c3f"}}>
+            <nav  style={{display:"flex",alignItems:"center",position:"sticky",top:"0px",zIndex:100,height:"44px",backgroundColor:"#db4c3f"}}>
               
             <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
           
@@ -338,7 +351,7 @@ function Userdashboard() {
        
 
         </div>
-
+        </>
     )
 }
 

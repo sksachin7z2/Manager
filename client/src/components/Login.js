@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Navbar from './Navbar';
 import Alert from './Alert';
+import Footer from './Footer';
 
 // import Spinner from './Spinner'
 const Login = (props) => {
@@ -63,18 +64,19 @@ const Login = (props) => {
           {/* {loading&&<Spinner/>} */}
            <form onSubmit={handleSubmit}>
   <div className="form-group my-3">
-    <label className='my-2 ' htmlFor="email">Email address</label>
+    <label className='my-2 bold' htmlFor="email">Email address</label>
     <input type="email" value={credentials.email} className="form-control" id="email" name="email" aria-describedby="emailHelp"onChange={onchange}/>
     
   </div>
   <div className="form-group my-3">
-    <label className='my-2 ' htmlFor="password">Password</label>
+    <label className='my-2 bold' htmlFor="password">Password</label>
     <input type="password"  value={credentials.password}className="form-control" id="password" name="password" onChange={onchange}/>
   </div>
   <div className='text-center'>
   <button  type="submit" className="btn btn-primary my-3 ">Sign In</button></div>
 </form>
         </div>
+        <Footer/>
         </>
     )
 }

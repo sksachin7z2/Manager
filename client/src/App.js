@@ -13,7 +13,7 @@ import React,{useEffect} from 'react'
 import TaskState from './context/tasks/TaskState';
 import Login from './components/Login';
 import Signup from './components/Signup'
-import Footer from './components/Footer';
+
 function App() {
   useEffect(() => {
        
@@ -41,7 +41,7 @@ const host="https://manager7z2.herokuapp.com"
           <Route exact path="/about"  key="about" element={<About/>}/>
           <Route exact path="/user"  key="user" element={<Userdashboard/>}/>
    </Routes>
-   <Footer/>
+   
    </Router>
    </TaskState>
   );

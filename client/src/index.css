@@ -179,6 +179,9 @@ btnnob{
 .container p{
   font-family: 'Akaya Telivigala';
 }
+.bold{
+  font-weight: bold;
+}
 .flexCenter{
   display: flex;
   justify-content: center;
