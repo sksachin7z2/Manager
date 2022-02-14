@@ -2,18 +2,18 @@ import React,{useState} from 'react'
 import {useNavigate,Link} from 'react-router-dom'
 import Navbar from './Navbar';
 import Alert from './Alert';
-// import Spinner from './Spinner.js'
+
 const Signup = (props)=> {
     const [credentials, setcredentials] = useState({name:"",email:"",password:"",cpassword:""})
-    // const [loading, setLoading] = useState(false);
+    
         let navigate=useNavigate();
         const[alert,setAlert]=useState(null);
     const host=props.host;
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        // setLoading(true);
+        
         localStorage.removeItem("token");
-        // localStorage.removeItem("userId");
+        
 
         const {name,email,password,cpassword}=credentials
         if(password===cpassword){
@@ -28,24 +28,22 @@ const Signup = (props)=> {
             
           });
           const json =await response.json(); 
-          // console.log(json);
-          //redirect
+        
           if(json.success)
           {
               localStorage.setItem('token',json.authToken);
-              // localStorage.setItem('userId',json.userId);
-            //   setLoading(false);
+            
               navigate('/user');
-              // showAlert("Created Account Successfully","success");
+             
           }
           else{
              showAlert("Email already exist or format is wrong","danger");
-            //  setLoading(false);
+           
           }
         }
         else{
             showAlert("password didnot match","danger");
-            // setLoading(false);
+           
         }
     }
     const onchange=(e)=>{
@@ -65,27 +63,28 @@ const Signup = (props)=> {
       <Navbar/>
       <Alert alert={alert}/>
         <div className="app1">
-         {/* { loading &&<Spinner/>} */}
+          <h2 className='text-center my-3'>Create your Account</h2>
+         
             <form onSubmit={handleSubmit}>
   <div className="form-group">
-    <label className='darkmode' htmlFor="name">Name</label>
+    <label className='my-2' htmlFor="name">Name</label>
     <input type="text" className="form-control" id="name" name="name"  onChange={onchange} aria-describedby="emailHelp" minLength={3}  required/>
    
   </div>
   <div className="form-group">
-    <label className='darkmode' htmlFor="email">Email address</label>
+    <label className='my-2' htmlFor="email">Email address</label>
     <input type="email" className="form-control" id="email" name="email" onChange={onchange} aria-describedby="emailHelp" required/>
    
   </div>
   <div className="form-group">
-    <label className='darkmode' htmlFor="password">Password</label>
+    <label className='my-2' htmlFor="password">Password</label>
     <input type="password" className="form-control" id="password" onChange={onchange} name="password"  minLength={5} required/>
   </div>
   <div className="form-group">
-    <label className='darkmode' htmlFor="password">Confirm Password</label>
+    <label className='my-2' htmlFor="password">Confirm Password</label>
     <input type="password" className="form-control" id="cpassword"  onChange={onchange} name="cpassword"  minLength={5} required/>
   </div>
-  <div>Already have an Acoount ? <Link to="/login">Login</Link></div>
+  <div>Already have an Acoount ? <Link to="/login"> <strong> Login</strong></Link></div>
   <button type="submit" className="btn btn-primary my-3">Signup</button>
 </form>
         </div>

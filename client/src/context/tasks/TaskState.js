@@ -2,8 +2,8 @@ import React,{useState} from "react";
 import noteContext from "./TasksContext";
 
 const NoteState=(props)=>{
-    // const host="https://manager7z2.herokuapp.com";
-    const host="http://localhost:5000";
+    const host="https://manager7z2.herokuapp.com";
+    // const host="http://localhost:5000";
    const notesInitial=[
    
   ]
@@ -15,12 +15,12 @@ const NoteState=(props)=>{
   const [dp1, setDp] = useState([]);
 
 const [notes, setNotes] = useState(notesInitial);
-// const [scheduletask, setscheduletask] = useState(notesInitial);
+
 const [project, setProject] = useState(notesInitial);
-//get a note
+
 
 const getNote=async()=>{
-  //api call
+ 
    
   setLoading(true);
     setIsMounted(true)
@@ -80,19 +80,16 @@ const getScheduleNoteweek=async()=>{
      headers: {
        'Content-Type': 'application/json',
        "auth-token":localStorage.getItem('token')
-      // 'schedule':localStorage.getItem('schedule'),
+      
       
      }
     
      
    });
- //   const json =response.json(); 
+
      const json =await response.json()
 
-    //  json.map((e)=>{
-
-    //  })
-    // console.log(json);
+   
     setNotes(json)
     
     setLoading(false);
@@ -132,8 +129,7 @@ const deleteNote=async(id)=>{
      
       headers: {
         'Content-Type': 'application/json',
-        // "auth-token":localStorage.getItem('token')
-        // 'projectId':localStorage.getItem('projectId')
+        
       }
     });
     const json =await response.json(); 
@@ -152,9 +148,9 @@ const editNote=async(id,title,description)=>{
        
         headers: {
           'Content-Type': 'application/json',
-          // "auth-token":localStorage.getItem('token'),
+         
           'projectId':localStorage.getItem('projectId'),
-          // 'schedule':localStorage.getItem('schedule')
+         
       'schedule':localStorage.getItem('schedule')
             
         },
@@ -251,14 +247,14 @@ const getProject=async()=>{
      headers: {
        'Content-Type': 'application/json',
        "auth-token":localStorage.getItem('token')
-      // 'projectId':localStorage.getItem('projectId')
+      
      }
     
      
    });
- //   const json =response.json(); 
+
      const json =await response.json()
-    // console.log(json);
+   
     setProject(json)
     
     setLoading(false);
@@ -274,7 +270,7 @@ const addProject=async(name)=>{
    
     headers: {
       'Content-Type': 'application/json',
-      // 'projectId':localStorage.getItem('projectId'),
+      
       "auth-token":localStorage.getItem('token')
     },
     body: JSON.stringify({name})
@@ -288,25 +284,7 @@ const addProject=async(name)=>{
   setLoading(false);
 }
 
-//delete a note
-// const deleteproject=async(id)=>{
-   
-//   setLoading(true);
-//     const response = await fetch(`${host}/api/project/deleteproject/${id}`, {
-//       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-     
-//       headers: {
-//         'Content-Type': 'application/json',
-//         // "auth-token":localStorage.getItem('token')
-//         // 'projectId':localStorage.getItem('projectId')
-//       }
-//     });
-//     const json =await response.json(); 
-//     console.log(json)
-//     const newproject= project.filter((pro)=>{return pro._id!==id});
-//     setProject(newproject);
-//     setLoading(false);
-// }
+
 //Edit a Note
 const editProject=async(id,name)=>{
     //api call
@@ -318,7 +296,7 @@ const editProject=async(id,name)=>{
         headers: {
           'Content-Type': 'application/json',
           "auth-token":localStorage.getItem('token')
-          // 'projectId':localStorage.getItem('projectId')
+          
         },
        
         body: JSON.stringify({name})
@@ -364,7 +342,7 @@ const deleteProject=async(id)=>{
    
     headers: {
       'Content-Type': 'application/json',
-      // "auth-token":localStorage.getItem('token'),
+     
       'projectId':localStorage.getItem('projectId')
     }
   });
@@ -397,16 +375,15 @@ const addMedia=async(selectedpic)=>{
   //api call
   
   let media=selectedpic;
-  // media=media.toString();
-  console.log(typeof(media), media);
+ 
+  if(JSON.stringify(selectedpic).includes('png') ||JSON.stringify(selectedpic).includes('jpg')||JSON.stringify(selectedpic).includes('jpeg')||JSON.stringify(selectedpic).includes('gif')){
   setLoading(true);
   const response = await fetch(`${host}/api/media/addmedia`, {
      method: 'POST', // *GET, POST, PUT, DELETE, etc.
     
      headers: {
        'Content-Type': 'application/json',
-      //  'projectId':localStorage.getItem('projectId'),
-      //  'schedule':localStorage.getItem('schedule')
+     
        "auth-token":localStorage.getItem('token')
      },
      body: JSON.stringify({media})
@@ -417,7 +394,9 @@ const addMedia=async(selectedpic)=>{
  
  setDp(dp1.concat(json));
  console.log(json)
-   
+  }
+  else
+  alert("Please select .jpg, .jpeg, .png or .gif");
  }
  const getdp=async()=>{
   setLoading(true);
@@ -428,15 +407,15 @@ const response = await fetch(`${host}/api/media/getmedia`, {
    headers: {
      'Content-Type': 'application/json',
      "auth-token":localStorage.getItem('token'),
-    // 'projectId':localStorage.getItem('projectId')
+   
     
    }
   
    
  });
-//   const json =response.json(); 
+
    const json =await response.json()
-  console.log(JSON.stringify(json));
+  
   setDp(json);
   
   setLoading(false);
@@ -450,18 +429,18 @@ const response = await fetch(`${host}/api/media/getmedia`, {
       headers: {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem('token')
-        // 'projectId':localStorage.getItem('projectId')
+       
       }
     });
     const json =await response.json(); 
     console.log(json)
-    // const newNotes= notes.filter((note)=>{return note._id!==id});/
+    
     setDp([]);
     setLoading(false);
 }
 const updatemedia=async(id,selectedpic)=>{
   //api call
-  
+  if(JSON.stringify(selectedpic).includes('png') ||JSON.stringify(selectedpic).includes('jpg')||JSON.stringify(selectedpic).includes('jpeg')||JSON.stringify(selectedpic).includes('gif')){
   setLoading(true);
   const response = await fetch(`${host}/api/media/updatemedia/${id}`, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -469,7 +448,7 @@ const updatemedia=async(id,selectedpic)=>{
       headers: {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem('token')
-        // 'projectId':localStorage.getItem('projectId')
+       
       },
      
       body: JSON.stringify({selectedpic})
@@ -491,6 +470,10 @@ const updatemedia=async(id,selectedpic)=>{
   }
     setDp(newMedia)
     setLoading(false);
+}
+else{
+  alert("Please select .jpg, .jpeg, .png or .gif");
+}
 }
 
 const handlec=()=>{

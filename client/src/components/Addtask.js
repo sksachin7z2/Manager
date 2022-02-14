@@ -4,8 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 function Addtask(props) {
   const [value, onChange1] = useState(new Date());
-  // const [value1, onChange2] = useState("");
-  // const [value1, onChange1] = useState(null);
+  
 
   const context = useContext(TasksContext);
   const { handlesubmittask,handlecancel } = context;
@@ -15,7 +14,7 @@ function Addtask(props) {
     description: "",
     selectedproject: "",
   });
-  // const [temp, settemp] = useState(0);
+  
   const onchange = (e) => {
     settask({ ...task, [e.target.name]: e.target.value });
   };
@@ -50,7 +49,7 @@ function Addtask(props) {
       </div>
       {localStorage.getItem('projectname')!=="Today"&&<span
         onClick={() => {
-          // onChange1(new Date(0,0,0,0,0,0,0,0,0));
+          
          
           document.getElementById("calenderr").classList.remove("dipnone");
         }}
@@ -106,7 +105,7 @@ function Addtask(props) {
         className="calendar dipnone"
         id="calenderr"
         
-        // onClicklocalStorage.setItem("schedule", value.setHours(5, 30, 0, 0, 0));
+        
       >
         <span
           onClick={() => {
@@ -118,7 +117,7 @@ function Addtask(props) {
         >
           No due date
         </span>
-        <span className="hover-cursor" style={{color:"black",position:"relative",left:"7em"}} onClick={() => {
+        <span className="hover-cursor p-3" style={{color:"black",position:"relative",left:"7em",fontWeight:"bold"}} onClick={() => {
              
              document.getElementById("calenderr").classList.add("dipnone");
            }}>X</span>

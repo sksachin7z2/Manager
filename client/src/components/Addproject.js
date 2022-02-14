@@ -3,9 +3,9 @@ import downarrow from './down-arrow.png'
 import TasksContext from '../context/tasks/TasksContext';
 import { useNavigate } from 'react-router-dom';
 
-// import CreateProject from './CreateProject'
+
 import Projects from './Projects'
-// import { Navigate } from 'react-router-dom';
+
 function Addproject(props) {
   let navigate=useNavigate();
 
@@ -84,12 +84,12 @@ function Addproject(props) {
 
 <div  className="modal fade" id="createProject" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
-    <div className="modal-content">
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
+    <div className="modal-content bgquick">
+      <div  className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">Create Project</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
+      <div  className="modal-body">
       <form>
   <div className="mb-3">
     <label  htmlFor="name" className="form-label ">Name</label>
@@ -101,8 +101,8 @@ function Addproject(props) {
   
 </form>
       </div>
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
-        <button ref={refClose1} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div  className="modal-footer">
+        <button ref={refClose1} type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
         <button disabled={pro.name.length<1}type="button" className="btn btn-primary"  onClick={handleClick}>Create</button>
       </div>
     </div>
@@ -120,12 +120,12 @@ function Addproject(props) {
 
 <div  className="modal fade" id="updateProject" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
-    <div className="modal-content">
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
+    <div className="modal-content bgquick">
+      <div  className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">Update Project</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
+      <div  className="modal-body">
       <form>
   <div className="mb-3">
     <label  htmlFor="ename" className="form-label ">Name</label>
@@ -137,8 +137,8 @@ function Addproject(props) {
   
 </form>
       </div>
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
-        <button ref={refClose2} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div  className="modal-footer">
+        <button ref={refClose2} type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
         <button disabled={epro.ename.length<1}type="button" className="btn btn-primary"  onClick={handleUpdate}>Update</button>
       </div>
     </div>

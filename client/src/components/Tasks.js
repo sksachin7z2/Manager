@@ -4,10 +4,7 @@ import TasksContext from '../context/tasks/TasksContext'
 function Tasks(props) {
   const context = useContext(TasksContext);
   const {deleteNote}=context;
-// const onChange=()=>{
-//   onChange1();
-//   // document.getElementById('calenderr').classList.add('dipnone')
-// }
+
 var getdate=()=>{
   var date=props.task.schedule;
   var date1;
@@ -32,7 +29,7 @@ return date1;
     <i onClick={()=>{deleteNote(props.task._id)}} className="far fa-check-circle"></i>
     <i onClick={()=>{props.updateNote(props.task)}} className="fas fa-edit mx-3"></i>
     <span className="badge bg-success  m-3">{getdate()}</span>
-    {/* <div>{value}</div> */}
+   
       </div>
 </div>
 <hr />

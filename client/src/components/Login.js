@@ -58,20 +58,21 @@ const Login = (props) => {
       <>
       <Navbar/>
       <Alert alert={alert}/>
-        <div className="app1">
+        <div className="app2">
+          <h2 className='text-center'>Sign In</h2>
           {/* {loading&&<Spinner/>} */}
            <form onSubmit={handleSubmit}>
   <div className="form-group my-3">
-    <label className='darkmode ' htmlFor="email">Email address</label>
+    <label className='my-2 ' htmlFor="email">Email address</label>
     <input type="email" value={credentials.email} className="form-control" id="email" name="email" aria-describedby="emailHelp"onChange={onchange}/>
     
   </div>
   <div className="form-group my-3">
-    <label className='darkmode ' htmlFor="password">Password</label>
+    <label className='my-2 ' htmlFor="password">Password</label>
     <input type="password"  value={credentials.password}className="form-control" id="password" name="password" onChange={onchange}/>
   </div>
   <div className='text-center'>
-  <button  type="submit" className="btn btn-primary my-3 ">Submit</button></div>
+  <button  type="submit" className="btn btn-primary my-3 ">Sign In</button></div>
 </form>
         </div>
         </>

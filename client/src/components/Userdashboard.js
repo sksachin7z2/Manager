@@ -3,7 +3,6 @@ import inbox from './inbox.png'
 import calender from './calendar.png'
 import upcoming from './upcoming.png'
 import home from './home.png'
-// import { useNavigate } from 'react-router-dom';
 import Addtask from './Addtask';
 import FileBase from 'react-file-base64';
 import Calendar from 'react-calendar';
@@ -15,6 +14,7 @@ import Addproject from './Addproject'
 import Dp from './Dp'
 import CreateProject from './CreateProject'
 import {useNavigate} from 'react-router-dom'
+import dash from './dash.png'
 import Dpp from './Dpp'
 function Userdashboard() {
   let navigate=useNavigate()
@@ -25,19 +25,19 @@ function Userdashboard() {
          return date;
          
        }
-      //  let navigate=useNavigate();
+      
         let date=new Date();
             date=date.toDateString()
             const ref=useRef(null)
             const refquick=useRef(null)
-            // const refdp=useRef(null)
+           
             const [dp, setDp] = useState("");
     const refClose=useRef(null)
     const [note, setnote] = useState({id:"",etitle:"",edescription:""})
            const context = useContext(TasksContext)
            const {updatemedia,deletemedia,dp1,getdp,addMedia,handlec,visible,handleaddtask,notes,getNote,editNote,getScheduleNote,getScheduleNoteweek}=context;
           
-    //    console.log(visible);
+  
     const onchange=(e)=>{
         setnote({...note,[e.target.name]:e.target.value})
     }
@@ -58,14 +58,14 @@ function Userdashboard() {
        localStorage.setItem("schedule", new Date().toDateString());
        getScheduleNote();}
         refClose.current.click()                                         
-        // props.showAlert("Updated Successfully","success");
+        
       }
      
       
     useEffect(() => {
        
      
-     
+      document.body.style.overflow="hidden";
       
         if(localStorage.getItem('token')){
           localStorage.setItem("projectname","Inbox");
@@ -75,6 +75,9 @@ function Userdashboard() {
         }
         else{
           navigate("/login")
+        }
+        return () => {
+          document.body.style.overflowY="scroll";
         }
         
         
@@ -92,7 +95,7 @@ function Userdashboard() {
 
 <div  style={{zIndex:1055,width:"300px"}} className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Manage</h5>
+    <h5 className="offcanvas-title  headerfam" id="offcanvasExampleLabel">Quick Add</h5>
     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
@@ -138,28 +141,30 @@ function Userdashboard() {
 
             </div>
               
-            <nav  style={{display:"flex",alignItems:"center",zIndex:100,position:"sticky",top:0,height:"44px",backgroundColor:"#db4c3f"}}>
+            <nav  style={{display:"flex",alignItems:"center",zIndex:100,height:"44px",backgroundColor:"#db4c3f"}}>
               
             <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
           
             <div onClick={()=>{document.getElementById("ep").style.display="flex"}} style={{position:"absolute",right:"14em"}} id="profile" className='dp' >
                   {JSON.stringify(dp1)!=="[]"?dp1.map((dp)=>{
                      
-                    // document.getElementById("profile").innerHTML=image;
+                    
 
                    return <Dp key={dp._id} image={dp.selectedpic} small={true}/>
 
                   }):<Dpp/>}
                   
-                  {/* <img src={dp1[0].selectedpic} alt="" width="100%" /> */}
+                 
             </div>
            
+            
            <div id="ep" className='editprofile' >
+             <h6 className='labelava'>Change Avatar</h6>
           <div style={{display:"flex",alignItems:"center",width:"7em"}}>
             <h5 style={{position:"relative",right:"-19rem",cursor:"pointer",top:"-4rem"}} onClick={()=>{document.getElementById("ep").style.display="none"}}>X</h5>
             {JSON.stringify(dp1)!=="[]"?dp1.map((dp)=>{
                      
-                     // document.getElementById("profile").innerHTML=image;
+                     
  
                     return <Dp key={dp._id} image={dp.selectedpic}/>
  
@@ -177,9 +182,10 @@ function Userdashboard() {
               </div>
               </div>
              
+           
            </div>
             <div onClick={()=>{refquick.current.click();handlec();setQuick(true)}} className="btnp1"><i className="fa fa-plus"  aria-hidden="true"></i></div>
-            <button style={{position:"absolute",right:"1em"}} onClick={()=>{localStorage.removeItem('token');navigate('/')}} className='btn btn-primary'>Logout</button>
+            <button style={{position:"absolute",right:"1em"}} onClick={()=>{localStorage.removeItem('token');navigate('/');}} className='btn btn-primary'>Logout</button>
             </nav>
             <div   className='d-flex '>
             <div className='mainnav' style={{overflow:"scroll",height:"100vh",width:"289px",backgroundColor:"#f4f1f1"}}>
@@ -198,7 +204,7 @@ function Userdashboard() {
                       localStorage.setItem("schedule",gettoday());
                       getScheduleNote();
  localStorage.setItem("projectId","61d1719194c87b7ff0486240");
-// getNote();
+
 
                     }}   style={{fontWeight:"bold",marginTop:"auto"}} className='addtask'>
                     Today
@@ -217,6 +223,7 @@ function Userdashboard() {
                     <hr  />
 
                     {notes.map((task)=>{
+                    
                return <Tasks   key={task._id} task={task} updateNote={updateNote}/>
            })}
                     {/* {scheduletask.map((scheduletask)=>{
@@ -232,7 +239,11 @@ function Userdashboard() {
                      </div>
                 </div>}
               
+                {notes.toString()==="" &&<div className='default'>
+                  
+                  <img src={dash} alt="" width="100%" />
                 
+                </div>}
             </div>
             </div>
 
@@ -244,7 +255,7 @@ function Userdashboard() {
 
 <div className="modal fade" id="quickadd" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
-    <div className="modal-content">
+    <div className="modal-content bgquick">
       <div className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">Quick Add</h5>
         <button  type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -253,7 +264,7 @@ function Userdashboard() {
         <Addtask quick={quick}/>
       </div>
       <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
         
       </div>
     </div>
@@ -269,12 +280,12 @@ function Userdashboard() {
 
 <div  className="modal fade" id="updatee" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
-    <div className="modal-content">
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-header">
+    <div className="modal-content bgquick">
+      <div  className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">Edit Task</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-body">
+      <div  className="modal-body">
       <form style={{height:"26em"}}>
   <div className="mb-3">
     <label  htmlFor="etitle" className="form-label ">Title</label>
@@ -292,7 +303,7 @@ function Userdashboard() {
         className="calendar1 dipnone1"
         id="calenderr1"
         
-        // onClicklocalStorage.setItem("schedule", value.setHours(5, 30, 0, 0, 0));
+        
       >
         <span
           onClick={() => {
@@ -304,7 +315,7 @@ function Userdashboard() {
         >
           No due date
         </span>
-        <span className="hover-cursor" style={{color:"black",position:"relative",left:"7em"}} onClick={() => {
+        <span className="hover-cursor p-3" style={{color:"black",position:"relative",left:"7em" ,fontWeight:"bold"}} onClick={() => {
              
              document.getElementById("calenderr1").classList.add("dipnone1");
            }}>X</span>
@@ -317,8 +328,8 @@ function Userdashboard() {
   
 </form>
       </div>
-      <div style={{backgroundColor:"rgb(49, 51, 85)",color:"white"}} className="modal-footer">
-        <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div className="modal-footer">
+        <button ref={refClose} type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
         <button disabled={note.etitle.length<1}type="button" className="btn btn-primary"  onClick={handleClick}>Update Note</button>
       </div>
     </div>

@@ -1,16 +1,22 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Be+Vietnam+Pro:wght@200&family=Lobster&family=Source+Code+Pro:ital@1&display=swap');
+.default{
+  width: 300px;
+  margin: 4rem auto;
+}
+a{
+  text-decoration: none;
+}
+.headerfam{
+  font-family: 'Akaya Telivigala';
+  font-size: x-large;
+}
+body{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #f9fafb
+
+}
 .addtask:hover{
 color:brown;
 cursor: pointer;
@@ -20,13 +26,20 @@ i:hover{
   font-weight: bold;
   cursor: pointer;
 }
-body{
-  overflow: hidden;
-}
+
 .rotate{
   transform: rotate(90deg);
 }
-
+.text-centerpt h1{
+  font-family: 'Akaya Telivigala', cursive;
+}
+.text-centerpt h2{
+  font-family: 'Akaya Telivigala';
+}
+.text-centerpt .labelp{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: bold;
+}
 .btnp:hover{
  
   color: brown;
@@ -73,11 +86,23 @@ body{
     z-index: 1;
     box-shadow: 0 2px 10px rgb(0 0 0 / 30%);
 }
+.text-centerpt{
+  text-align: center;
+  padding-top: 5em;
+}
 .dp{
   width: 23px;
 }
+.home_p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  /* background-image: linear-gradient(45deg, rgb(90, 72, 165), rgb(185, 124, 124)); */
+}
 .editprofile{
   display: none;
+  z-index: 100;
   position: absolute;
     top: 4rem;
     right: 2em;
@@ -86,25 +111,80 @@ body{
     padding: 40px 9px 30px 9px;
     max-width: 362px;
     background-color: blanchedalmond;}
+    .bgquick{
+      background-image: url('./components/quickbg.png');
+      background-size: cover;
+    }
+   
 .dipnone{
   display:none;
+}
+.labelava{
+  position: absolute;
+  top: 7px;
+  left: 26px;
+  font-weight: bolder;
 }
 .dipnone1{
   display:none;
 }
+.form-control{
+  background: transparent;
+}
 .app1{
-  
-  position: relative;
-  width: 22rem;
-  top: 4rem;
+  background-image: url('./components/mainp.png');
   border: 2px solid black;
   border-radius: 1rem;
   margin: 0 auto;
   padding: 2rem;
+  max-width: 343px;
+  /* height: 80vh; */
+  margin-bottom: 151px;
   
 }
+hr{
+  
+  color: black
 
-@media screen and (max-width: 793px) {
+  
+}
+btnnob{
+  border:none;
+
+}
+.app2{
+  background-image: url('./components/mainp.png');
+
+  border: 2px solid black;
+  border-radius: 1rem;
+  margin: 6rem auto;
+  padding: 2rem;
+  max-width: 343px;
+  /* height: 80vh; */
+  margin-bottom: 148px;
+}
+.footer{
+  height: 10vh;
+    color: white;
+    background-color: black;
+    padding: 22px;
+}
+.App{
+  max-width: 90vw;
+     margin: 0 auto;
+}
+.darkmode{
+  color:white;
+}
+.container p{
+  font-family: 'Akaya Telivigala';
+}
+.flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 770px) {
   .sidebar{
     display:block;
   }
@@ -113,5 +193,27 @@ body{
   }
   .editprofile{
     right:1rem;
+  }
+  .mainp{
+    width:82%
+  }
+  .text-centerpt{
+    padding-top: 0px;
+  }
+}
+@media screen and (max-width: 765px) {
+  .mainp{
+    width:50%
+  }
+}
+@media screen and (max-width: 527px){
+  .mainp{
+    width:82%
+  }
+  .app1{
+    border:none
+  }
+  .app2{
+    border:none
   }
 }
