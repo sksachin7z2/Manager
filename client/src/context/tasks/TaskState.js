@@ -386,8 +386,8 @@ const addMedia=async(selectedpic)=>{
   //api call
   
   let media=selectedpic;
- 
-  if(JSON.stringify(selectedpic).includes('png') ||JSON.stringify(selectedpic).includes('jpg')||JSON.stringify(selectedpic).includes('jpeg')||JSON.stringify(selectedpic).includes('gif')){
+
+  if(JSON.stringify(selectedpic).slice(0,23).includes('png') ||JSON.stringify(selectedpic).slice(0,23).includes('jpg')||JSON.stringify(selectedpic).slice(0,23).includes('jpeg')||JSON.stringify(selectedpic).slice(0,23).includes('gif')){
   setLoading(true);
   const response = await fetch(`${host}/api/media/addmedia`, {
      method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -452,7 +452,9 @@ const response = await fetch(`${host}/api/media/getmedia`, {
 }
 const updatemedia=async(id,selectedpic)=>{
   //api call
-  if(JSON.stringify(selectedpic).includes('png') ||JSON.stringify(selectedpic).includes('jpg')||JSON.stringify(selectedpic).includes('jpeg')||JSON.stringify(selectedpic).includes('gif')){
+ 
+
+  if(JSON.stringify(selectedpic).slice(0,23).includes('png') ||JSON.stringify(selectedpic).slice(0,23).includes('jpg')||JSON.stringify(selectedpic).slice(0,23).includes('jpeg')||JSON.stringify(selectedpic).slice(0,23).includes('gif')){
   setLoading(true);
   const response = await fetch(`${host}/api/media/updatemedia/${id}`, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.

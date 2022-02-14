@@ -158,7 +158,7 @@ function Userdashboard() {
               
             <div style={{position:"relative",left:"5em"}}><Link  to="/"><img  src={home} alt="home" width="24px" /></Link></div>
           
-            <div onClick={()=>{document.getElementById("ep").style.display="flex"}} style={{position:"absolute",right:"14em"}} id="profile" className='dp' >
+            <div onClick={()=>{document.getElementById("ep").style.display="flex"}} style={{position:"absolute",right:"13.5em",height:"34px",overflow:"hidden",borderRadius:"26rem"}} id="profile" className='dp' >
                   {JSON.stringify(dp1)!=="[]"?dp1.map((dp)=>{
                      
                     

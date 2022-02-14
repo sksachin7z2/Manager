@@ -91,7 +91,7 @@ i:hover{
   padding-top: 5em;
 }
 .dp{
-  width: 23px;
+  width: 34px;
 }
 .home_p{
   display: flex;
@@ -178,6 +178,11 @@ btnnob{
 }
 .container p{
   font-family: 'Akaya Telivigala';
+}
+.adjust_dp{
+  width: 7rem;
+  height: 6rem;
+  overflow: hidden;
 }
 .bold{
   font-weight: bold;
