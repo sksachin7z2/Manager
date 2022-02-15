@@ -24,21 +24,21 @@ function Contact() {
             <form action="https://formsubmit.co/sksachin7z2@gmail.com" method="POST">
   <div className="form-group">
     <label className='darkmode my-2' htmlFor="name">Name</label>
-    <input type="text" className="form-control " id="name" name="name"  onChange={onchange} aria-describedby="emailHelp"   required/>
+    <input type="text" className="form-control "  style={{backgroundColor:"white"}} id="name" name="name"  onChange={onchange} aria-describedby="emailHelp"   required/>
    
   </div>
   <div className="form-group">
     <label className='darkmode my-2' htmlFor="email">Email address</label>
-    <input type="email" className="form-control " id="email" name="email" onChange={onchange} aria-describedby="emailHelp" required/>
+    <input type="email" className="form-control "  style={{backgroundColor:"white"}} id="email" name="email" onChange={onchange} aria-describedby="emailHelp" required/>
    
   </div>
   <div className="form-group">
   <label className='darkmode my-2' htmlFor="subject">Subject</label>
-    <input type="text" className="form-control " id="subject" onChange={onchange} name="subject"   required/>
+    <input type="text" className="form-control "  style={{backgroundColor:"white"}} id="subject" onChange={onchange} name="subject"   required/>
   </div>
   <div className="form-group">
   <label className='darkmode my-2' htmlFor="description">Description</label><br />
-    <textarea name="description" id="description" className='form-control' cols="50" rows="10"></textarea>
+    <textarea name="description" style={{backgroundColor:"white"}} id="description" className='form-control' cols="50" rows="10"></textarea>
   </div>
   
   <button type="submit" className="btn btn-primary my-3">Send</button>
