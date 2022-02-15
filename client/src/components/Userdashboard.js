@@ -255,7 +255,7 @@ function Userdashboard() {
                 {notes.toString()==="" &&<div className='default'>
                   
                   <img src={dash} alt="" width="100%" />
-                
+                  <div className='defaultfam text-center'>No due tasks!!! Enjoy</div>
                 </div>}
             </div>
             </div>

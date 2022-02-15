@@ -11,6 +11,10 @@ a{
   font-family: 'Akaya Telivigala';
   font-size: x-large;
 }
+.defaultfam{
+  font-family: 'Akaya Telivigala';
+  font-size: x-large;
+}
 body{
   overflow-y: scroll;
   overflow-x: hidden;
