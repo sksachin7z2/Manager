@@ -18,7 +18,7 @@ function Contact() {
         
         <div className="col-md-12 query">
           <div style={{border:"3px solid black",borderRadius:"5px"}} className="card-body">
-            <h5 className="card-title text-center ">Contact Me</h5>
+            <h5 className="card-title text-center  headerfam">Contact Me</h5>
            
             <div  className='App'>
             <form action="https://formsubmit.co/sksachin7z2@gmail.com" method="POST">
