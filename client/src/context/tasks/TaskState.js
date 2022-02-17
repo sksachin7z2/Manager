@@ -127,7 +127,7 @@ const addNote=async(title,description)=>{
 //delete a note
 const deleteNote=async(id)=>{
   setProgress(10);
-  // setLoading(true);
+  setLoading(true);
     const response = await fetch(`${host}/api/task/deletetask/${id}`, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
      
@@ -142,7 +142,7 @@ const deleteNote=async(id)=>{
     console.log(json)
     const newNotes= notes.filter((note)=>{return note._id!==id});
     setNotes(newNotes);
-    // setLoading(false);
+    setLoading(false);
 }
 //Edit a Note
 const editNote=async(id,title,description)=>{
@@ -332,6 +332,7 @@ const editProject=async(id,name)=>{
 }
 
 const deleteProject=async(id)=>{
+  setLoading(true);
   setProgress(10);
   const response = await fetch(`${host}/api/task/fetchalltasks`, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -377,6 +378,7 @@ setProgress(70);
     setProject(newProjects);
     
   setProgress(100);
+  setLoading(false);
 }
 const handlecancel=()=>{
   setvisible(false);
