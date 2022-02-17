@@ -210,7 +210,7 @@ btnnob{
     right:1rem;
   }
   .mainp{
-    width:82%
+    width:50%
   }
   .text-centerpt{
     padding-top: 0px;
@@ -223,7 +223,7 @@ btnnob{
 }
 @media screen and (max-width: 527px){
   .mainp{
-    width:82%
+    width:62%
   }
   .app1{
     border:none
