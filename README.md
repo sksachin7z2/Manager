@@ -10,6 +10,13 @@ https://managerclient.vercel.app/
 3. TECHNOLOGY STACK: REACTJS, EXPRESS JS, MONGODB,
    NODEJS
 
+# Install locally
+
+1. clone this repo and https://github.com/sksachin7z2/managerclient as frontend
+2. Install dependencies (npm install)
+3. npm start
+4. Same for managerclient repo
+
 # Screenshot
 
 ![m1](https://user-images.githubusercontent.com/89345567/213673854-0804b5c2-117d-4035-baa4-bbb1f123a13a.JPG)
