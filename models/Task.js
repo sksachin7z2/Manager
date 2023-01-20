@@ -5,12 +5,12 @@ const { Schema } = mongoose;
   const TasksSchema = new Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'user' //not necessary to use just for explaining
     },
      
       project:{
        type:mongoose.Schema.Types.ObjectId,
-       ref:'project'
+       ref:'project' //not necessary to use just for explaining
       },
    title:{type:String,
    required:true

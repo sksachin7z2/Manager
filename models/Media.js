@@ -5,7 +5,7 @@ const { Schema } = mongoose;
   const MediaSchema = new Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'user' //not necessary to use just for explaining
     },
   
    selectedpic:{
